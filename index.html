@@ -52,6 +52,9 @@
   .exp-detail-inner { overflow: hidden; }
   .exp-detail-inner p { padding-top: 14px; border-top: 1px solid rgba(35,31,32,0.08); font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
   .exp-card.expanded .exp-detail { grid-template-rows: 1fr; margin-top: 14px; }
+  @media (hover: hover) and (pointer: fine) {
+    .exp-card:hover .exp-detail, .exp-card:focus-visible .exp-detail { grid-template-rows: 1fr; margin-top: 14px; }
+  }
   .exp-period { font-size: 12px; color: var(--mid-gray); white-space: nowrap; }
 
   .cases-carousel { position: relative; --card-w: 38%; }
@@ -346,19 +349,24 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  document.querySelectorAll('.exp-card').forEach(function(card) {
-    function toggle() {
-      var expanded = card.classList.toggle('expanded');
-      card.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    }
-    card.addEventListener('click', toggle);
-    card.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
+  // Devices with a mouse expand experience cards on hover (pure CSS, see .exp-card:hover
+  // above). Touch devices have no hover, so there we fall back to tap-to-toggle via JS.
+  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!canHover) {
+    document.querySelectorAll('.exp-card').forEach(function(card) {
+      function toggle() {
+        var expanded = card.classList.toggle('expanded');
+        card.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       }
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
     });
-  });
+  }
 
   function init() {
     var targets = document.querySelectorAll('.reveal');
