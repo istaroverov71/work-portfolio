@@ -48,11 +48,12 @@
   .exp-role-title { color: var(--black); font-weight: 600; }
   .exp-period { font-size: 12px; color: var(--mid-gray); white-space: nowrap; }
 
-  .cases-carousel { position: relative; }
-  .cases-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 4px 4px 8px; margin: -4px -4px 0; scrollbar-width: none; }
+  .cases-carousel { position: relative; --card-w: 56%; }
+  .cases-track { display: flex; align-items: center; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 24px calc((100% - var(--card-w)) / 2) 28px; margin: -24px 0 -28px; scrollbar-width: none; cursor: grab; }
   .cases-track::-webkit-scrollbar { display: none; }
-  .case-card { scroll-snap-align: start; flex: 0 0 calc((100% - 40px) / 3); min-width: 0; background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid rgba(35,31,32,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .case-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(35,31,32,0.1); }
+  .cases-track.dragging { cursor: grabbing; scroll-snap-type: none; }
+  .case-card { scroll-snap-align: center; flex: 0 0 var(--card-w); min-width: 0; background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid rgba(35,31,32,0.06); box-shadow: 0 20px 48px rgba(35,31,32,0.1); transform: scale(0.86); opacity: 0.4; filter: blur(2px); transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease; will-change: transform, opacity, filter; }
+  .case-card.is-active { transform: scale(1); opacity: 1; filter: blur(0); }
   .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 28px; }
   .carousel-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(35,31,32,0.12); background: var(--white); color: var(--black); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; flex-shrink: 0; }
   .carousel-arrow:hover { background: var(--cream); border-color: var(--teal); }
@@ -113,7 +114,7 @@
     section { padding: 60px 24px; }
     .hero { padding: 120px 24px 60px; }
     .stats-grid { grid-template-columns: 1fr; }
-    .case-card { flex-basis: calc((100% - 20px) / 2); }
+    .cases-carousel { --card-w: 72%; }
     .principles-grid { grid-template-columns: 1fr; }
     .cta-section { flex-direction: column; align-items: flex-start; }
     .cta-contacts { align-items: flex-start; }
@@ -126,7 +127,7 @@
     .clients-grid { grid-template-columns: repeat(4,1fr); gap: 8px; }
     .cta-section { padding: 40px 28px; }
     .exp-grid { grid-template-columns: 1fr; }
-    .case-card { flex-basis: 88%; }
+    .cases-carousel { --card-w: 86%; }
     .carousel-arrow { width: 36px; height: 36px; }
   }
 </style>
@@ -378,36 +379,58 @@
 
   var cards = Array.prototype.slice.call(track.children);
   var autoplayTimer = null;
-  var isPointerDown = false;
+  var rafId = null;
 
   cards.forEach(function(_, i) {
     var dot = document.createElement('button');
     dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', 'Кейс ' + (i + 1));
-    dot.addEventListener('click', function() { scrollToCard(i); });
+    dot.addEventListener('click', function() { scrollToCard(i); startAutoplay(); });
     dotsWrap.appendChild(dot);
   });
   var dots = Array.prototype.slice.call(dotsWrap.children);
 
+  function cardCenter(card) {
+    return card.offsetLeft + card.offsetWidth / 2;
+  }
+
   function activeIndex() {
-    var trackLeft = track.scrollLeft;
+    var viewCenter = track.scrollLeft + track.clientWidth / 2;
     var closest = 0, closestDist = Infinity;
     cards.forEach(function(card, i) {
-      var dist = Math.abs(card.offsetLeft - track.offsetLeft - trackLeft);
+      var dist = Math.abs(cardCenter(card) - viewCenter);
       if (dist < closestDist) { closestDist = dist; closest = i; }
     });
     return closest;
   }
 
-  function updateDots() {
-    var idx = activeIndex();
-    dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+  function updateVisualState() {
+    var viewCenter = track.scrollLeft + track.clientWidth / 2;
+    var cardSpan = cards[0].offsetWidth + 20;
+    var closest = 0, closestDist = Infinity;
+
+    cards.forEach(function(card, i) {
+      var dist = (cardCenter(card) - viewCenter) / cardSpan;
+      var absDist = Math.abs(dist);
+      if (absDist < closestDist) { closestDist = absDist; closest = i; }
+
+      var scale = Math.max(1 - absDist * 0.16, 0.8);
+      var opacity = Math.max(1 - absDist * 0.45, 0.3);
+      var blur = Math.min(absDist * 3, 6);
+      card.style.transform = 'scale(' + scale + ')';
+      card.style.opacity = opacity;
+      card.style.filter = 'blur(' + blur + 'px)';
+      card.style.zIndex = String(100 - Math.round(absDist * 10));
+    });
+
+    cards.forEach(function(card, i) { card.classList.toggle('is-active', i === closest); });
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === closest); });
   }
 
   function scrollToCard(i) {
     i = (i + cards.length) % cards.length;
     var card = cards[i];
-    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    track.scrollTo({ left: cardCenter(card) - track.clientWidth / 2, behavior: 'smooth' });
   }
 
   function next() { scrollToCard(activeIndex() + 1); }
@@ -427,17 +450,39 @@
   prevBtn.addEventListener('click', function() { prev(); startAutoplay(); });
   nextBtn.addEventListener('click', function() { next(); startAutoplay(); });
 
-  var scrollTimeout;
   track.addEventListener('scroll', function() {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(updateDots, 80);
+    if (rafId) return;
+    rafId = requestAnimationFrame(function() { updateVisualState(); rafId = null; });
   }, { passive: true });
 
   track.addEventListener('mouseenter', stopAutoplay);
-  track.addEventListener('mouseleave', startAutoplay);
-  track.addEventListener('touchstart', function() { isPointerDown = true; stopAutoplay(); }, { passive: true });
-  track.addEventListener('touchend', function() { isPointerDown = false; startAutoplay(); }, { passive: true });
+  track.addEventListener('mouseleave', function() { if (!isDragging) startAutoplay(); });
+  track.addEventListener('touchstart', stopAutoplay, { passive: true });
+  track.addEventListener('touchend', startAutoplay, { passive: true });
 
+  // Drag-to-scroll with mouse (touch keeps native swipe)
+  var isDragging = false, dragStartX = 0, dragStartScroll = 0;
+  track.addEventListener('pointerdown', function(e) {
+    if (e.pointerType !== 'mouse') return;
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragStartScroll = track.scrollLeft;
+    track.classList.add('dragging');
+    stopAutoplay();
+  });
+  window.addEventListener('pointermove', function(e) {
+    if (!isDragging) return;
+    track.scrollLeft = dragStartScroll - (e.clientX - dragStartX);
+  });
+  window.addEventListener('pointerup', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    scrollToCard(activeIndex());
+    startAutoplay();
+  });
+
+  updateVisualState();
   startAutoplay();
 })();
 </script>
