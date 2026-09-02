@@ -26,10 +26,9 @@
   section { padding: 80px 48px; max-width: 1100px; margin: 0 auto; }
 
   .hero { padding-top: 140px; padding-bottom: 80px; max-width: 1100px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
-  .hero-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s ease forwards 0.1s; }
-  .hero h1 { font-size: clamp(42px, 6vw, 72px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; color: var(--black); margin-bottom: 24px; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s ease forwards 0.2s; }
+  .hero h1 { font-size: clamp(42px, 6vw, 72px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; color: var(--black); margin-bottom: 24px; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s ease forwards 0.1s; }
   .hero h1 span { color: var(--rust); }
-  .hero-desc { max-width: 560px; font-size: 17px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 48px; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s ease forwards 0.35s; }
+  .hero-desc { max-width: 560px; font-size: 17px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 48px; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s ease forwards 0.25s; }
 
   .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(35,31,32,0.08); border-radius: 16px; overflow: hidden; opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards 0.5s; }
   .stat-item { background: var(--white); padding: 28px 32px; transition: background 0.2s; }
@@ -49,9 +48,19 @@
   .exp-role-title { color: var(--black); font-weight: 600; }
   .exp-period { font-size: 12px; color: var(--mid-gray); white-space: nowrap; }
 
-  .cases-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-  .case-card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid rgba(35,31,32,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .cases-carousel { position: relative; }
+  .cases-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 4px 4px 8px; margin: -4px -4px 0; scrollbar-width: none; }
+  .cases-track::-webkit-scrollbar { display: none; }
+  .case-card { scroll-snap-align: start; flex: 0 0 calc((100% - 40px) / 3); min-width: 0; background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid rgba(35,31,32,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
   .case-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(35,31,32,0.1); }
+  .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 28px; }
+  .carousel-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(35,31,32,0.12); background: var(--white); color: var(--black); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; flex-shrink: 0; }
+  .carousel-arrow:hover { background: var(--cream); border-color: var(--teal); }
+  .carousel-arrow:active { transform: scale(0.94); }
+  .carousel-arrow svg { width: 16px; height: 16px; }
+  .carousel-dots { display: flex; gap: 8px; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: var(--mid-gray); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .carousel-dot.active { background: var(--rust); transform: scale(1.25); }
   .case-img-wrap { width: 100%; overflow: hidden; background: var(--cream); border-radius: 12px; }
   .case-img-wrap img { width: 100%; height: auto; display: block; border-radius: 12px; transition: transform 0.5s ease; }
   .case-card:hover .case-img-wrap img { transform: scale(1.03); }
@@ -104,7 +113,7 @@
     section { padding: 60px 24px; }
     .hero { padding: 120px 24px 60px; }
     .stats-grid { grid-template-columns: 1fr; }
-    .cases-grid { grid-template-columns: 1fr; }
+    .case-card { flex-basis: calc((100% - 20px) / 2); }
     .principles-grid { grid-template-columns: 1fr; }
     .cta-section { flex-direction: column; align-items: flex-start; }
     .cta-contacts { align-items: flex-start; }
@@ -117,6 +126,8 @@
     .clients-grid { grid-template-columns: repeat(4,1fr); gap: 8px; }
     .cta-section { padding: 40px 28px; }
     .exp-grid { grid-template-columns: 1fr; }
+    .case-card { flex-basis: 88%; }
+    .carousel-arrow { width: 36px; height: 36px; }
   }
 </style>
 </head>
@@ -134,7 +145,6 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-tag">Digital Marketing Manager</div>
   <h1>Иван<br><span>Староверов</span></h1>
   <p class="hero-desc">Специалист по партнёрскому маркетингу и маркетинговой аналитике с 5+ годами опыта в крупнейших IT-компаниях.<br>
 Запускаю performance- и медийные кампании, строю партнёрства, нахожу точки роста через данные.</p>
@@ -181,37 +191,62 @@
 <section id="cases">
   <div class="reveal"><p class="section-label">Портфолио</p></div>
   <div class="reveal"><h2 class="section-title">Кейсы</h2></div>
-  <div class="cases-grid">
-    <div class="case-card reveal reveal-delay-1">
-      <div class="case-img-wrap"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Марафон T-Банк" loading="lazy"></div>
-      <div class="case-body">
-        <div class="case-title">Марафон T-Банк в Одноклассниках</div>
-        <div class="case-row"><strong>Задача:</strong> Анонсирование Фото-марафона на 8 марта с целью "Поздравить женщин и напомнить о кэшбэке Т-Банк при покупке подарков".</div>
-        <div class="case-row"><strong>Вклад:</strong> Провел анализ CTR по промо-материалам. Заменил креативы и CTA на более конкретные призывы к участию.</div>
-        <div class="case-result">📈 +28% перевыполнение кол-ва участников марафона</div>
+  <div class="cases-carousel reveal">
+    <div class="cases-track" id="casesTrack">
+      <div class="case-card">
+        <div class="case-img-wrap"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Марафон T-Банк" loading="lazy"></div>
+        <div class="case-body">
+          <div class="case-title">Марафон T-Банк в Одноклассниках</div>
+          <div class="case-row"><strong>Задача:</strong> Анонсирование Фото-марафона на 8 марта с целью "Поздравить женщин и напомнить о кэшбэке Т-Банк при покупке подарков".</div>
+          <div class="case-row"><strong>Вклад:</strong> Провел анализ CTR по промо-материалам. Заменил креативы и CTA на более конкретные призывы к участию.</div>
+          <div class="case-result">📈 +28% перевыполнение кол-ва участников марафона</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-img-wrap"><img src="https://i.ibb.co/NnTXK11G/Frame-10-2.png" alt="Спецпроект Tiswell" loading="lazy"></div>
+        <div class="case-body">
+          <div class="case-title">Интерактивный спецпроект Tiswell</div>
+          <div class="case-row"><strong>Задача:</strong> Медийная кампания + рост продаж зубной пасты на Ozon.</div>
+          <div class="case-row"><strong>Вклад:</strong> Согласование идей, форматов и креативов, запуск более интерактивной и виральной механики.</div>
+          <div class="case-result">📈 +32% перевыполнения по переходам на страницу товара</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-img-wrap"><img src="https://i.ibb.co/sdtSF9ZY/Post-keshbek-erid.png" alt="Молодёжная карта Сбера" loading="lazy"></div>
+        <div class="case-body">
+          <div class="case-title">Молодёжная карта Сбера</div>
+          <div class="case-row"><strong>Задача:</strong> Продвижение дебетовой карты на аудиторию 14–24 года.</div>
+          <div class="case-row"><strong>Вклад:</strong> Анализ результатов размещения после первой недели, перенастройка таргета, изменение слоганов и креативов.</div>
+          <div class="case-result">📈 х2 рост числа заявок после оптимизации</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-img-wrap"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Кейс 4" loading="lazy"></div>
+        <div class="case-body">
+          <div class="case-title">Кейс 4 — жду детали от тебя</div>
+          <div class="case-row"><strong>Задача:</strong> —</div>
+          <div class="case-row"><strong>Вклад:</strong> —</div>
+          <div class="case-result">📈 —</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-img-wrap"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Кейс 5" loading="lazy"></div>
+        <div class="case-body">
+          <div class="case-title">Кейс 5 — жду детали от тебя</div>
+          <div class="case-row"><strong>Задача:</strong> —</div>
+          <div class="case-row"><strong>Вклад:</strong> —</div>
+          <div class="case-result">📈 —</div>
+        </div>
       </div>
     </div>
-    <div class="case-card reveal reveal-delay-2">
-      <div class="case-img-wrap"><img src="https://i.ibb.co/NnTXK11G/Frame-10-2.png" alt="Спецпроект Tiswell" loading="lazy"></div>
-      <div class="case-body">
-        <div class="case-title">Интерактивный спецпроект Tiswell</div>
-        <div class="case-row"><strong>Задача:</strong> Медийная кампания + рост продаж зубной пасты на Ozon.</div>
-        <div class="case-row"><strong>Вклад:</strong> Согласование идей, форматов и креативов, запуск более интерактивной и виральной механики.</div>
- <div style="height: 1em;"></div>
- <div style="height: 1em;"></div>
-        <div class="case-result">📈 +32% перевыполнения по переходам на страницу товара</div>
-      </div>
-    </div>
-    <div class="case-card reveal reveal-delay-3">
-      <div class="case-img-wrap"><img src="https://i.ibb.co/sdtSF9ZY/Post-keshbek-erid.png" alt="Молодёжная карта Сбера" loading="lazy"></div>
-      <div class="case-body">
-        <div class="case-title">Молодёжная карта Сбера</div>
-  <div style="height: 1em;"></div>
-        <div class="case-row"><strong>Задача:</strong> Продвижение дебетовой карты на аудиторию 14–24 года.</div>
-        <div class="case-row"><strong>Вклад:</strong> Анализ результатов размещения после первой недели, перенастройка таргета, изменение слоганов и креативов.</div>
- <div style="height: 1em;"></div>
-        <div class="case-result">📈 х2 рост числа заявок после оптимизации</div>
-      </div>
+    <div class="carousel-controls">
+      <button class="carousel-arrow" id="casesPrev" aria-label="Предыдущий кейс">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-dots" id="casesDots"></div>
+      <button class="carousel-arrow" id="casesNext" aria-label="Следующий кейс">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -332,6 +367,78 @@
     document.querySelector('nav').style.boxShadow =
       window.scrollY > 20 ? '0 4px 24px rgba(35,31,32,0.06)' : 'none';
   }, { passive: true });
+})();
+
+(function() {
+  var track = document.getElementById('casesTrack');
+  var dotsWrap = document.getElementById('casesDots');
+  var prevBtn = document.getElementById('casesPrev');
+  var nextBtn = document.getElementById('casesNext');
+  if (!track) return;
+
+  var cards = Array.prototype.slice.call(track.children);
+  var autoplayTimer = null;
+  var isPointerDown = false;
+
+  cards.forEach(function(_, i) {
+    var dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Кейс ' + (i + 1));
+    dot.addEventListener('click', function() { scrollToCard(i); });
+    dotsWrap.appendChild(dot);
+  });
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function activeIndex() {
+    var trackLeft = track.scrollLeft;
+    var closest = 0, closestDist = Infinity;
+    cards.forEach(function(card, i) {
+      var dist = Math.abs(card.offsetLeft - track.offsetLeft - trackLeft);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    return closest;
+  }
+
+  function updateDots() {
+    var idx = activeIndex();
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+  }
+
+  function scrollToCard(i) {
+    i = (i + cards.length) % cards.length;
+    var card = cards[i];
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+  }
+
+  function next() { scrollToCard(activeIndex() + 1); }
+  function prev() { scrollToCard(activeIndex() - 1); }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(function() {
+      var idx = activeIndex();
+      scrollToCard(idx + 1 >= cards.length ? 0 : idx + 1);
+    }, 4500);
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
+
+  prevBtn.addEventListener('click', function() { prev(); startAutoplay(); });
+  nextBtn.addEventListener('click', function() { next(); startAutoplay(); });
+
+  var scrollTimeout;
+  track.addEventListener('scroll', function() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(updateDots, 80);
+  }, { passive: true });
+
+  track.addEventListener('mouseenter', stopAutoplay);
+  track.addEventListener('mouseleave', startAutoplay);
+  track.addEventListener('touchstart', function() { isPointerDown = true; stopAutoplay(); }, { passive: true });
+  track.addEventListener('touchend', function() { isPointerDown = false; startAutoplay(); }, { passive: true });
+
+  startAutoplay();
 })();
 </script>
 </body>
