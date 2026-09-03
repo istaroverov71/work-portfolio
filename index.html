@@ -54,10 +54,7 @@
   .exp-detail-inner li { position: relative; padding-left: 16px; }
   .exp-detail-inner li + li { margin-top: 10px; }
   .exp-detail-inner li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
-  .exp-card.expanded .exp-detail { grid-template-rows: 1fr; margin-top: 14px; }
-  @media (hover: hover) and (pointer: fine) {
-    .exp-card:hover .exp-detail, .exp-card:focus-visible .exp-detail { grid-template-rows: 1fr; margin-top: 14px; }
-  }
+  .exp-grid.all-expanded .exp-detail { grid-template-rows: 1fr; margin-top: 14px; }
   .exp-period { font-size: 12px; color: var(--mid-gray); white-space: nowrap; }
 
   .cases-carousel { position: relative; --card-w: 38%; }
@@ -369,20 +366,23 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Devices with a mouse expand experience cards on hover (pure CSS, see .exp-card:hover
-  // above). Touch devices have no hover, so there we fall back to tap-to-toggle via JS.
-  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (!canHover) {
-    document.querySelectorAll('.exp-card').forEach(function(card) {
-      function toggle() {
-        var expanded = card.classList.toggle('expanded');
-        card.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      }
-      card.addEventListener('click', toggle);
+  // Clicking any experience card expands the detail text on ALL cards at once,
+  // and it stays open (independent of scroll/hover) until clicked again.
+  var expGrid = document.querySelector('.exp-grid');
+  var expCards = document.querySelectorAll('.exp-card');
+  if (expGrid && expCards.length) {
+    var allExpanded = false;
+    var toggleAll = function() {
+      allExpanded = !allExpanded;
+      expGrid.classList.toggle('all-expanded', allExpanded);
+      expCards.forEach(function(c) { c.setAttribute('aria-expanded', allExpanded ? 'true' : 'false'); });
+    };
+    expCards.forEach(function(card) {
+      card.addEventListener('click', toggleAll);
       card.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          toggle();
+          toggleAll();
         }
       });
     });
