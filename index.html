@@ -50,7 +50,10 @@
   .exp-role-title { color: var(--black); font-weight: 600; }
   .exp-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease, margin-top 0.35s ease; }
   .exp-detail-inner { overflow: hidden; }
-  .exp-detail-inner p { padding-top: 14px; border-top: 1px solid rgba(35,31,32,0.08); font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
+  .exp-detail-inner ul { list-style: none; margin: 0; padding: 14px 0 0; border-top: 1px solid rgba(35,31,32,0.08); font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
+  .exp-detail-inner li { position: relative; padding-left: 16px; }
+  .exp-detail-inner li + li { margin-top: 10px; }
+  .exp-detail-inner li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
   .exp-card.expanded .exp-detail { grid-template-rows: 1fr; margin-top: 14px; }
   @media (hover: hover) and (pointer: fine) {
     .exp-card:hover .exp-detail, .exp-card:focus-visible .exp-detail { grid-template-rows: 1fr; margin-top: 14px; }
@@ -190,19 +193,35 @@
     <div class="exp-card reveal reveal-delay-1" tabindex="0" role="button" aria-expanded="false">
       <div class="exp-company">VK</div>
       <div class="exp-role"><span class="exp-role-title">Менеджер по развитию бизнеса</span><span class="exp-period">май 2025 — сейчас</span></div>
-      <div class="exp-detail"><div class="exp-detail-inner"><p>Текст скоро появится — опишу подробнее, чем занимался на этой позиции.</p></div></div>
+      <div class="exp-detail"><div class="exp-detail-inner"><ul>
+        <li>Привлёк 20+ новых партнёров и вел переговоры на уровне CEO и CMO — сформировал стабильный портфель клиентов и принёс 50+ млн руб. выручки.</li>
+        <li>Разработал индивидуальные офферы и медиапланы под KPI партнёров из 5 вертикалей (Банки, FMCG, E-com, Travel, IT) с бюджетами до 35 млн руб. Согласовал бизнес-цели, защитил стратегии размещения, выстроил долгосрочные отношения с ключевыми ЛПР.</li>
+        <li>Реализовал 40+ спецпроектов от концепции и постановки KPI до запуска и постаналитики; оптимизировал кампании на основе анализа метрик CTR, CPM, CPC, CPA, выявлял точки роста и повышал конверсию.</li>
+        <li>Провёл кастдев-интервью с партнёрами, выявил барьеры и сформировал точечные предложения для партнеров.</li>
+      </ul></div></div>
     </div>
     <div class="exp-card reveal reveal-delay-2" tabindex="0" role="button" aria-expanded="false">
       <div class="exp-company">Kaspersky</div>
       <div class="exp-role"><span class="exp-role-title">Специалист по поддержке продаж</span><span class="exp-period">апр. 2023 — май 2025</span></div>
-      <div class="exp-detail"><div class="exp-detail-inner"><p>Текст скоро появится — опишу подробнее, чем занимался на этой позиции.</p></div></div>
+      <div class="exp-detail"><div class="exp-detail-inner"><ul>
+        <li>Запустил более 50 партнёрских маркетинговых кампаний (B2B и B2C), которые увеличили среднюю конверсию на 20%.</li>
+        <li>Повысил Retention клиентов через renewal-кампании в нескольких регионах — разработал механики продления, контролировал корректность цен и своевременность скидок; кампании вошли в оптимизацию, принёсшую $12 млн дополнительной выручки.</li>
+        <li>Провёл 5 A/B-тестирований CTA-элементов и механик воронки продаж, зафиксирован рост кликов до 15%.</li>
+        <li>Координировал операционную деятельность в Jira и Confluence: расстановка приоритетов, постановка задач кросс-команды, контроль сроков, оптимизация процессов.</li>
+      </ul></div></div>
       <div class="exp-role" style="margin-top:10px"><span class="exp-role-title">Маркетолог</span><span class="exp-period">март 2022 — март 2023</span></div>
-      <div class="exp-detail"><div class="exp-detail-inner"><p>Текст скоро появится — опишу подробнее, чем занимался на этой позиции.</p></div></div>
+      <div class="exp-detail"><div class="exp-detail-inner"><ul>
+        <li>Создал маркетинговые материалы (email-рассылки, баннеры, лендинги), которые повысили CTR на 3% и open rate на 5%.</li>
+        <li>Организовал международное оффлайн мероприятие GITEX Dubai, которое привлекло 200+ квалифицированных B2B-лидов.</li>
+        <li>Разработал и реализовал маркетинговые кампании, обеспечившие рост выручки в регионе META на 10% за год.</li>
+      </ul></div></div>
     </div>
     <div class="exp-card reveal reveal-delay-3" tabindex="0" role="button" aria-expanded="false">
       <div class="exp-company">Яндекс</div>
       <div class="exp-role"><span class="exp-role-title">Рекрутер</span><span class="exp-period">авг. 2021 — март 2022</span></div>
-      <div class="exp-detail"><div class="exp-detail-inner"><p>Текст скоро появится — опишу подробнее, чем занимался на этой позиции.</p></div></div>
+      <div class="exp-detail"><div class="exp-detail-inner"><ul>
+        <li>Закрыл 10 IT-позиций через активный поиск, скрининг и переговоры с кандидатами.</li>
+      </ul></div></div>
     </div>
   </div>
 </section>
