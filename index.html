@@ -68,8 +68,8 @@
   .hero-about .label { font-family: var(--mono); }
   .hero-about .italic { font-style: italic; color: var(--gray); }
   .hero-photo { grid-area: photo; display: flex; flex-direction: column; gap: 6px; }
-  .hero-photo-frame { position: relative; flex: 1; min-height: 0; overflow: hidden; background: repeating-linear-gradient(135deg, var(--stripe-a) 0 12px, var(--stripe-b) 12px 24px); }
-  .hero-photo-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
+  .hero-photo-frame { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #E9E1D2; }
+  .hero-photo-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
   .hero-skills { background: var(--teal); padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 3px solid var(--ink); margin: 37px -32px 0; }
@@ -349,7 +349,7 @@
       <p class="italic">Запускаю performance- и медийные кампании, строю партнёрства, нахожу точки роста через данные.</p>
     </div>
     <div class="hero-photo">
-      <div class="hero-photo-frame"><img src="img/ivan-staroverov.webp" alt="Иван Староверов" width="795" height="1193" fetchpriority="high"></div>
+      <div class="hero-photo-frame"><img src="img/ivan-staroverov.webp" alt="Иван Староверов" width="1024" height="1536" fetchpriority="high"></div>
       <div class="hero-skills"><span>Партнёрский маркетинг</span><span>Аналитика</span></div>
     </div>
   </div>
