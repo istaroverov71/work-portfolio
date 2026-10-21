@@ -60,17 +60,17 @@
   .hero-meta { display: flex; align-items: baseline; justify-content: space-between; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
   .hero-first { font-family: var(--serif); font-style: italic; font-size: 44px; letter-spacing: 0; text-transform: none; }
   .hero-name { position: relative; z-index: 3; margin: calc(-9 * var(--u)) 0 0 -10px; font-size: calc(246 * var(--u)); line-height: 0.82; letter-spacing: calc(-5 * var(--u)); color: var(--rust); mix-blend-mode: multiply; white-space: nowrap; }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) calc(370 * var(--u)); grid-template-areas: "role photo" "about photo"; column-gap: 40px; }
-  .hero-role { grid-area: role; padding-top: 40px; display: flex; flex-direction: column; gap: 10px; max-width: 780px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) calc(210 * var(--u)); grid-template-areas: "role photo" "about photo"; column-gap: 40px; margin-top: 40px; }
+  .hero-role { grid-area: role; display: flex; flex-direction: column; gap: 10px; max-width: 780px; }
   .hero-role-title { font-size: calc(76 * var(--u)); line-height: 0.92; letter-spacing: -1px; text-wrap: balance; }
   .hero-role-title span { display: block; white-space: nowrap; color: var(--rust); }
   .hero-about { grid-area: about; margin-top: 48px; max-width: 560px; display: flex; flex-direction: column; gap: 10px; font-family: var(--serif); font-size: 18px; line-height: 1.5; text-wrap: pretty; }
   .hero-about .label { font-family: var(--mono); }
   .hero-about .italic { font-style: italic; color: var(--gray); }
-  .hero-photo { grid-area: photo; position: relative; z-index: 1; margin-top: calc(-36 * var(--u)); height: calc(440 * var(--u)); min-height: 300px; display: grid; grid-template-rows: 1fr 64px; gap: 6px; }
-  .hero-photo-img { background: repeating-linear-gradient(135deg, var(--stripe-a) 0 12px, var(--stripe-b) 12px 24px); display: flex; align-items: flex-end; padding: 14px; }
-  .hero-photo-img span { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: var(--sheet); padding: 5px 9px; }
-  .hero-skills { background: var(--teal); padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .hero-photo { grid-area: photo; display: flex; flex-direction: column; gap: 6px; }
+  .hero-photo-frame { position: relative; flex: 1; min-height: 0; background: var(--stripe-a); }
+  .hero-photo-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .hero-skills { background: var(--teal); padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 3px solid var(--ink); margin: 37px -32px 0; }
   .stat { min-height: 150px; padding: 16px 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
@@ -210,13 +210,13 @@
     .sheet::after, .nav::after { display: none; }
     .hero-first { font-size: 28px; line-height: 1; }
     .hero-name { margin: 10px 0 0; font-size: calc(72 * var(--m)); letter-spacing: -2px; }
-    .hero-grid { grid-template-columns: 1fr 150px; grid-template-areas: "role photo" "about about"; column-gap: 12px; align-items: end; margin-top: 12px; }
-    .hero-role { padding-top: 0; gap: 6px; }
+    .hero-grid { grid-template-columns: minmax(0, 1fr) 132px; column-gap: 14px; margin-top: 12px; }
+    .hero-role { gap: 6px; }
     .hero-role .label { font-size: 9px; }
     .hero-role-title { font-size: calc(34 * var(--m)); line-height: 0.95; letter-spacing: 0; text-wrap: wrap; }
-    .hero-photo { margin-top: 0; height: 212px; min-height: 0; display: block; background: repeating-linear-gradient(135deg, var(--stripe-a) 0 10px, var(--stripe-b) 10px 20px); border-bottom: 22px solid var(--teal); }
-    .hero-photo-img, .hero-skills { display: none; }
-    .hero-about { margin-top: 16px; font-size: 16px; }
+    .hero-photo { gap: 0; border-bottom: 22px solid var(--teal); }
+    .hero-skills { display: none; }
+    .hero-about { margin-top: 14px; font-size: 15px; }
     .hero-about .label, .hero-about .italic { display: none; }
 
     .stats { grid-template-columns: 1fr 1fr; margin: 22px -16px 0; border-bottom: 1px solid var(--ink); }
@@ -299,6 +299,10 @@
     .footer { font-size: 9px; padding-top: 10px; }
   }
 
+  @media (min-width: 560px) and (max-width: 860px) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr) 112px; }
+  }
+
   @media (min-width: 861px) {
     .note-head { display: contents; }
   }
@@ -344,8 +348,8 @@
       <p>Специалист по партнёрскому маркетингу и маркетинговой аналитике с 5+ годами опыта в крупнейших IT-компаниях.</p>
       <p class="italic">Запускаю performance- и медийные кампании, строю партнёрства, нахожу точки роста через данные.</p>
     </div>
-    <div class="hero-photo" aria-hidden="true">
-      <div class="hero-photo-img"><span>фото · портрет</span></div>
+    <div class="hero-photo">
+      <div class="hero-photo-frame"><img src="img/ivan-staroverov.jpg" alt="Иван Староверов" width="795" height="1193" fetchpriority="high"></div>
       <div class="hero-skills"><span>Партнёрский маркетинг</span><span>Аналитика</span></div>
     </div>
   </div>
