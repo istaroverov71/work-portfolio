@@ -4,569 +4,666 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иван Староверов — Digital Marketing</title>
+<meta name="description" content="Иван Староверов — партнёрский маркетинг и маркетинговая аналитика. VK, Kaspersky, Яндекс.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@500;600;700;800;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js-reveal');</script>
 <style>
   :root {
-    --black: #231F20; --black-2: #2B2725; --dark-gray: #5B564F; --mid-gray: #ABA595;
-    --rust: #B23F2C; --teal: #7EBDC2; --teal-dark: #2F6E73;
-    --cream: #F6EEDC; --paper: #FBF7EE; --cream-text: #F3EBDD;
-    --bg: #CFC8BC; --white: #FFFFFF; --text: #231F20; --text-secondary: #5B564F;
-    --font-display: 'Fira Sans Extra Condensed', sans-serif;
-    --font-serif: 'PT Serif', serif;
-    --font-mono: 'IBM Plex Mono', monospace;
+    --ink: #231F20;
+    --sheet: #F1EADC;
+    --page: #CFC8BC;
+    --paper: #FBF7EE;
+    --cream: #F3EBDD;
+    --rust: #BB4430;
+    --rust-light: #E07A62;
+    --teal: #7EBDC2;
+    --teal-dark: #2F6E73;
+    --gray: #64605C;
+    --stripe-a: #E3D9C7;
+    --stripe-b: #DBD0BC;
+    --line-light: rgba(243,235,221,0.4);
+    --display: 'Fira Sans Extra Condensed', sans-serif;
+    --serif: 'PT Serif', serif;
+    --mono: 'IBM Plex Mono', monospace;
+    /* 1px at a 1280px-wide sheet, shrinking proportionally below that */
+    --u: min(1px, calc(100vw / 1280));
+    --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; overflow-x: hidden; }
-  body { font-family: var(--font-serif); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--page); color: var(--ink); font-family: var(--mono); font-size: 16px; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: var(--rust); text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  img { display: block; }
+  :focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
 
-  .mono { font-family: var(--font-mono); }
+  .sheet { position: relative; max-width: 1280px; margin: 0 auto; background: var(--sheet); box-shadow: 0 30px 80px rgba(35,31,32,0.25); display: flex; flex-direction: column; overflow: hidden; }
+  .sheet::after, .nav::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 20; opacity: 0.22; background-image: var(--noise); }
+  section[id] { scroll-margin-top: 52px; }
 
-  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(246,238,220,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--black); }
-  .nav-logo { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--black); text-decoration: none; }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .display { font-family: var(--display); font-weight: 800; text-transform: uppercase; }
+  .rust { color: var(--rust); }
+  .m-only { display: none; }
+
+  /* ---------- NAV ---------- */
+  .nav { position: sticky; top: 0; z-index: 30; height: 53px; display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 0 32px; background: var(--sheet); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--ink); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--ink); transition: color 0.2s; }
   .nav-links a:hover { color: var(--rust); }
   .nav-links a.accent { color: var(--rust); }
 
-  .wrap { max-width: 1180px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
-  section { padding: 72px 48px; max-width: 1180px; margin: 0 auto; }
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding: 34px 32px 0; }
+  .hero-meta { display: flex; align-items: baseline; justify-content: space-between; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .hero-first { font-family: var(--serif); font-style: italic; font-size: 44px; letter-spacing: 0; text-transform: none; }
+  .hero-name { position: relative; z-index: 3; margin: calc(-9 * var(--u)) 0 0 -10px; font-size: calc(246 * var(--u)); line-height: 0.82; letter-spacing: calc(-5 * var(--u)); color: var(--rust); mix-blend-mode: multiply; white-space: nowrap; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) calc(370 * var(--u)); grid-template-areas: "role photo" "about photo"; column-gap: 40px; }
+  .hero-role { grid-area: role; padding-top: 40px; display: flex; flex-direction: column; gap: 10px; max-width: 780px; }
+  .hero-role-title { font-size: calc(76 * var(--u)); line-height: 0.92; letter-spacing: -1px; text-wrap: balance; }
+  .hero-role-title span { display: block; white-space: nowrap; color: var(--rust); }
+  .hero-about { grid-area: about; margin-top: 48px; max-width: 560px; display: flex; flex-direction: column; gap: 10px; font-family: var(--serif); font-size: 18px; line-height: 1.5; text-wrap: pretty; }
+  .hero-about .label { font-family: var(--mono); }
+  .hero-about .italic { font-style: italic; color: var(--gray); }
+  .hero-photo { grid-area: photo; position: relative; z-index: 1; margin-top: calc(-36 * var(--u)); height: calc(440 * var(--u)); min-height: 300px; display: grid; grid-template-rows: 1fr 64px; gap: 6px; }
+  .hero-photo-img { background: repeating-linear-gradient(135deg, var(--stripe-a) 0 12px, var(--stripe-b) 12px 24px); display: flex; align-items: flex-end; padding: 14px; }
+  .hero-photo-img span { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: var(--sheet); padding: 5px 9px; }
+  .hero-skills { background: var(--teal); padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
 
-  .eyebrow { display: block; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dark-gray); margin-bottom: 18px; }
-  .eyebrow .n { color: var(--rust); }
-  .section-title { font-family: var(--font-display); font-size: clamp(38px,7vw,78px); font-weight: 800; letter-spacing: -0.01em; line-height: 0.92; text-transform: uppercase; color: var(--black); margin-bottom: 44px; }
-  .section-title .accent { color: var(--rust); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 3px solid var(--ink); margin: 37px -32px 0; }
+  .stat { min-height: 150px; padding: 16px 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
+  .stat + .stat { border-left: 1px solid var(--ink); }
+  .stat.hl { background: var(--teal); }
+  .stat-num { font-family: var(--display); font-weight: 800; font-size: calc(80 * var(--u)); line-height: 0.85; }
+  .stat-num .small { font-size: 0.65em; }
+  .stat-label { font-family: var(--serif); font-style: italic; font-size: 15px; line-height: 1.3; }
 
-  /* HERO */
-  .hero { position: relative; padding-top: 128px; max-width: 1180px; margin: 0 auto; padding-left: 48px; padding-right: 48px; padding-bottom: 60px; }
-  .hero-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 28px; margin-bottom: 6px; opacity: 0; transform: translateY(10px); animation: fadeUp 0.6s ease forwards 0.05s; }
-  .hero-name-sm { font-family: var(--font-serif); font-style: italic; font-size: clamp(26px,3vw,38px); font-weight: 400; color: var(--black); }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dark-gray); margin-left: auto; }
-  .hero-name-lg { font-family: var(--font-display); font-size: clamp(64px,13vw,190px); font-weight: 800; letter-spacing: -0.01em; line-height: 0.82; text-transform: uppercase; color: var(--rust); margin: 0 0 40px; opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s ease forwards 0.18s; }
+  /* ---------- EXPERIENCE ---------- */
+  .exp { border-top: 1px solid var(--ink); display: flex; flex-direction: column; }
+  .exp-head { display: flex; flex-direction: column; gap: 24px; padding: 40px 32px 28px; border-bottom: 3px solid var(--ink); }
+  .exp-title-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .exp-title { display: flex; align-items: baseline; gap: calc(28 * var(--u)); white-space: nowrap; font-size: calc(200 * var(--u)); line-height: 0.8; letter-spacing: calc(-5 * var(--u)); }
+  .exp-summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-left: calc(480 * var(--u)); }
+  .exp-summary p { font-family: var(--serif); font-size: 17px; line-height: 1.5; }
+  .exp-all { align-self: flex-start; flex-shrink: 0; border: 1px solid var(--ink); padding: 10px 16px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s, color 0.2s; }
+  .exp-all:hover { background: var(--ink); color: var(--sheet); }
 
-  .hero-main { display: grid; grid-template-columns: 1.6fr 1fr; gap: 44px; align-items: start; margin-bottom: 36px; }
+  .company { display: grid; grid-template-columns: calc(510 * var(--u)) 1fr; border-bottom: 1px solid var(--ink); }
+  .company-side { padding: 28px 32px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--ink); }
+  .company-num { font-size: 11px; letter-spacing: 0.1em; }
+  .company-name { font-size: calc(96 * var(--u)); line-height: 0.9; letter-spacing: -2px; white-space: nowrap; }
+  .company-roles { padding: 16px 40px; display: flex; flex-direction: column; }
+  .role { display: flex; flex-direction: column; border-bottom: 1px dashed rgba(35,31,32,0.35); }
+  .role-btn { display: grid; grid-template-columns: 1fr auto auto; gap: 24px; align-items: baseline; text-align: left; padding: 16px 0; transition: color 0.2s; }
+  .role-btn:hover { color: var(--rust); }
+  .role-title { font-family: var(--serif); font-size: 26px; }
+  .role-meta { display: contents; }
+  .role-period { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); white-space: nowrap; }
+  .role-toggle { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rust); min-width: 150px; text-align: right; white-space: nowrap; }
+  .role-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s ease; }
+  .role-detail-inner { overflow: hidden; }
+  .exp.open .role-detail { grid-template-rows: 1fr; }
+  .ach-list { display: flex; flex-direction: column; gap: 14px; padding: 0 0 22px; max-width: 720px; }
+  .ach { display: grid; grid-template-columns: 40px 1fr; gap: 8px; font-family: var(--serif); font-size: 17px; line-height: 1.55; text-wrap: pretty; }
+  .ach-n { font-family: var(--mono); font-size: 11px; padding-top: 5px; color: var(--teal-dark); }
 
-  .hero-role-block { opacity: 0; transform: translateY(16px); animation: fadeUp 0.6s ease forwards 0.28s; margin-bottom: 36px; }
-  .hero-role { font-family: var(--font-display); font-size: clamp(30px,5vw,56px); font-weight: 800; letter-spacing: -0.005em; line-height: 0.96; text-transform: uppercase; color: var(--black); }
-  .hero-role .accent { color: var(--rust); display: block; }
+  /* ---------- CASES ---------- */
+  .cases { position: relative; background: var(--ink); color: var(--cream); padding: 64px 32px 72px; display: flex; flex-direction: column; gap: 48px; }
+  .cases-head { display: flex; align-items: center; gap: 24px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .cases-head .rule { flex: 1; height: 1px; background: var(--line-light); }
+  .cases-word { font-family: var(--display); font-weight: 800; font-size: calc(200 * var(--u)); letter-spacing: calc(-5 * var(--u)); line-height: 0.8; }
+  .cases-counter { white-space: nowrap; }
+  .cases-body { display: grid; grid-template-columns: calc(250 * var(--u)) minmax(0, 1fr); gap: calc(48 * var(--u)); align-items: start; }
+  .cases-index { display: flex; flex-direction: column; border-top: 1px solid var(--line-light); }
+  .cases-index button { display: grid; grid-template-columns: 36px 1fr; gap: 6px; text-align: left; padding: 14px 0; border-bottom: 1px solid var(--line-light); color: rgba(243,235,221,0.6); transition: color 0.2s; }
+  .cases-index button:hover { color: var(--cream); }
+  .cases-index button.active { color: var(--rust-light); }
+  .cases-index .n { font-size: 11px; padding-top: 3px; }
+  .cases-index .t { font-family: var(--serif); font-size: 16px; line-height: 1.3; }
+  .case { display: grid; grid-template-columns: calc(480 * var(--u)) minmax(0, 1fr); gap: calc(48 * var(--u)); align-items: start; }
+  .case[hidden] { display: none; }
+  .case-card { background: var(--sheet); padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+  .case-img { height: calc(520 * var(--u)); min-height: 320px; background: var(--stripe-a); display: flex; align-items: center; justify-content: center; }
+  .case-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .case-caption { display: flex; justify-content: space-between; color: var(--ink); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .case-info { display: flex; flex-direction: column; gap: 26px; }
+  .case-title { font-family: var(--display); font-weight: 800; font-size: max(40px, calc(52 * var(--u))); line-height: 0.92; text-transform: uppercase; text-wrap: balance; overflow-wrap: anywhere; }
+  .case-field { display: flex; flex-direction: column; gap: 6px; }
+  .case-field .label { color: var(--teal); }
+  .case-field p { font-family: var(--serif); font-size: 17px; line-height: 1.5; }
+  .case-result { border-top: 3px solid var(--rust); padding-top: 16px; }
+  .case-result .label { color: var(--rust-light); }
+  .case-result p { font-style: italic; font-size: 28px; line-height: 1.25; }
+  .case-nav { display: flex; align-self: flex-start; border: 1px solid rgba(243,235,221,0.6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .case-nav button { padding: 12px 18px; transition: background 0.2s, color 0.2s; }
+  .case-nav button + button { border-left: 1px solid rgba(243,235,221,0.6); }
+  .case-nav button:hover { background: var(--cream); color: var(--ink); }
 
-  .hero-about { opacity: 0; transform: translateY(16px); animation: fadeUp 0.6s ease forwards 0.36s; }
-  .hero-about p { font-size: 17px; line-height: 1.6; color: var(--text); margin-bottom: 14px; }
-  .hero-about p.italic { font-style: italic; color: var(--text-secondary); }
+  /* ---------- PRINCIPLES ---------- */
+  .principles { padding: 64px 32px 80px; display: flex; flex-direction: column; gap: 48px; border-bottom: 1px solid var(--ink); }
+  .pr-title { display: flex; flex-direction: column; white-space: nowrap; font-size: calc(200 * var(--u)); line-height: 0.8; letter-spacing: calc(-4 * var(--u)); }
+  .pr-title .indent { padding-left: calc(340 * var(--u)); }
+  .pr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; align-items: start; padding: 0 8px; }
+  .note { position: relative; background: var(--paper); padding: 34px 28px 30px; box-shadow: 0 8px 20px rgba(35,31,32,0.14); display: flex; flex-direction: column; gap: 14px; }
+  .note:nth-child(1) { transform: rotate(-1.2deg); }
+  .note:nth-child(2) { transform: rotate(0.9deg) translateY(24px); }
+  .note:nth-child(3) { transform: rotate(-0.6deg) translateY(-4px); }
+  .tape { position: absolute; }
+  .note:nth-child(1) .tape { left: 50%; top: -12px; width: 100px; height: 26px; margin-left: -50px; background: rgba(214,198,165,0.85); box-shadow: 0 1px 2px rgba(0,0,0,0.12); transform: rotate(-3deg); }
+  .note:nth-child(2) .tape { right: -14px; top: 16px; width: 90px; height: 24px; background: rgba(187,68,48,0.3); transform: rotate(38deg); }
+  .note:nth-child(3) .tape { left: 36px; top: -12px; width: 90px; height: 26px; background: rgba(126,189,194,0.55); transform: rotate(4deg); }
+  .note-num { font-family: var(--display); font-weight: 800; font-size: 72px; line-height: 0.8; color: var(--rust); }
+  .note-title { font-family: var(--serif); font-weight: 700; font-size: 28px; line-height: 1.1; }
+  .note-text { font-family: var(--serif); font-size: 16px; line-height: 1.55; text-wrap: pretty; }
 
-  .hero-photo { opacity: 0; transform: translateY(16px); animation: fadeUp 0.6s ease forwards 0.32s; }
-  .hero-photo-box { position: relative; aspect-ratio: 4/5; background-color: var(--cream); background-image: repeating-linear-gradient(45deg, rgba(35,31,32,0.07) 0 10px, transparent 10px 20px); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 14px; }
-  .hero-photo-box span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dark-gray); background: var(--bg); padding: 4px 10px; }
-  .skills-bar { display: flex; flex-wrap: wrap; background: var(--teal); overflow: hidden; }
-  .skills-bar span { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--black-2); padding: 12px 16px; }
-  .skills-bar span + span { border-left: 1px solid rgba(35,31,32,0.18); }
+  /* ---------- CLIENTS ---------- */
+  .clients { display: grid; grid-template-columns: calc(420 * var(--u)) minmax(0, 1fr); border-bottom: 1px solid var(--ink); }
+  .clients-head { padding: 40px 32px; border-right: 1px solid var(--ink); display: flex; flex-direction: column; gap: 8px; }
+  .clients-title { display: flex; flex-direction: column; font-size: calc(96 * var(--u)); line-height: 0.86; letter-spacing: -2px; white-space: nowrap; }
+  .clients-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .logo { aspect-ratio: 1.25 / 1; background: var(--paper); border-left: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 22px; display: flex; align-items: center; justify-content: center; }
+  .logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-  /* STATS */
-  .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); border-top: 3px solid var(--black); border-bottom: 3px solid var(--black); opacity: 0; transform: translateY(16px); animation: fadeUp 0.6s ease forwards 0.52s; }
-  .stat-item { padding: 26px 22px; border-left: 1px solid var(--black); }
-  .stat-item:first-child { border-left: none; }
-  .stat-item.hl { background: var(--teal); }
-  .stat-number { font-family: var(--font-display); font-size: clamp(38px,5vw,60px); font-weight: 800; letter-spacing: -0.01em; color: var(--black); line-height: 1; margin-bottom: 8px; }
-  .stat-number .accent { color: var(--rust); }
-  .stat-item.hl .stat-number .accent { color: var(--black-2); }
-  .stat-label { font-family: var(--font-serif); font-style: italic; font-size: 13.5px; color: var(--text-secondary); line-height: 1.4; }
-  .stat-item.hl .stat-label { color: var(--black-2); }
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--rust); color: var(--cream); padding: 56px 32px 28px; display: flex; flex-direction: column; gap: 40px; }
+  .contact-title, .contact-title h2 { display: flex; flex-direction: column; gap: 8px; }
+  .contact-big { font-size: calc(170 * var(--u)); line-height: 0.82; letter-spacing: calc(-4 * var(--u)); white-space: nowrap; }
+  .contact-big.dark { color: var(--ink); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contact-card { display: flex; flex-direction: column; gap: 18px; padding: 26px 28px; background: var(--sheet); color: var(--ink); transition: background 0.2s; }
+  .contact-card:hover { background: var(--paper); }
+  .contact-card.dark { background: var(--ink); color: var(--cream); }
+  .contact-card.dark:hover { background: #3A3431; }
+  .contact-card-top { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .contact-card-top .arrow { color: var(--rust); font-size: 22px; line-height: 1; }
+  .contact-card.dark .arrow { color: var(--teal); }
+  .contact-value { font-family: var(--display); font-weight: 700; font-size: calc(48 * var(--u)); line-height: 1; white-space: nowrap; }
+  .footer { display: flex; justify-content: space-between; gap: 16px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
 
-  /* EXPERIENCE */
-  .exp-summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin: -20px 0 28px; font-size: 14.5px; color: var(--text-secondary); }
-  .exp-expand-all { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--black); background: none; border: 1px solid var(--black); padding: 12px 18px; cursor: pointer; transition: background 0.2s, color 0.2s; white-space: nowrap; }
-  .exp-expand-all:hover { background: var(--black); color: var(--cream-text); }
-  .exp-list { border-top: 1px solid var(--black); }
-  .exp-entry { display: grid; grid-template-columns: minmax(150px,220px) 1fr; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--black); }
-  .exp-head { display: flex; align-items: baseline; gap: 12px; }
-  .exp-num { font-family: var(--font-mono); font-size: 13px; color: var(--mid-gray); }
-  .exp-company { font-family: var(--font-display); font-size: clamp(34px,5vw,56px); font-weight: 800; letter-spacing: -0.01em; line-height: 0.9; text-transform: uppercase; color: var(--black); }
-  .exp-roles { display: flex; flex-direction: column; }
-  .exp-role-row { padding: 14px 0; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 20px; cursor: pointer; }
-  .exp-role-row:not(:first-child) { border-top: 1px dashed rgba(35,31,32,0.3); }
-  .exp-role-row:first-child { padding-top: 0; }
-  .exp-role-title { font-family: var(--font-serif); font-size: 19px; color: var(--black); }
-  .exp-role-meta { display: flex; align-items: baseline; gap: 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
-  .exp-role-period { color: var(--mid-gray); white-space: nowrap; }
-  .exp-role-toggle { color: var(--rust); white-space: nowrap; }
-  .exp-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
-  .exp-detail-inner { overflow: hidden; }
-  .exp-detail-inner ul { list-style: none; padding: 4px 0 6px; font-size: 14.5px; color: var(--text-secondary); line-height: 1.6; }
-  .exp-detail-inner li { position: relative; padding-left: 18px; }
-  .exp-detail-inner li + li { margin-top: 10px; }
-  .exp-detail-inner li::before { content: '—'; position: absolute; left: 0; color: var(--teal-dark); }
-  .exp-list.all-expanded .exp-detail { grid-template-rows: 1fr; }
+  /* ---------- REVEAL ---------- */
+  .js-reveal .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+  .js-reveal .reveal.visible { opacity: 1; transform: none; }
 
-  /* CASES */
-  .cases-block { background: var(--black-2); color: var(--cream-text); margin: 0 -48px; padding: 56px 48px; }
-  .cases-head { display: flex; align-items: baseline; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
-  .cases-head .section-title { color: var(--cream-text); margin-bottom: 0; white-space: nowrap; }
-  .cases-head-line { flex: 1; min-width: 40px; height: 1px; background: rgba(243,235,221,0.3); align-self: center; }
-  .cases-block .eyebrow { color: var(--mid-gray); }
-  .cases-block .eyebrow .n { color: var(--teal); }
-  .cases-counter { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--mid-gray); white-space: nowrap; }
-  .cases-grid { display: grid; grid-template-columns: 260px 1fr; gap: 40px; }
-  .cases-index { display: flex; flex-direction: column; border-top: 1px solid rgba(243,235,221,0.25); }
-  .cases-index-item { font-family: var(--font-serif); font-size: 14.5px; line-height: 1.4; color: var(--mid-gray); background: none; border: none; border-bottom: 1px solid rgba(243,235,221,0.25); text-align: left; padding: 14px 0; cursor: pointer; display: flex; gap: 10px; }
-  .cases-index-item .i { font-family: var(--font-mono); font-size: 11px; flex-shrink: 0; padding-top: 2px; }
-  .cases-index-item:hover { color: var(--cream-text); }
-  .cases-index-item.active { color: var(--teal); }
-  .case-img-wrap { background: var(--cream); padding: 10px; margin-bottom: 10px; }
-  .case-img-wrap img { display: block; width: 100%; height: auto; }
-  .case-img-caption { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 26px; }
-  .case-title { font-family: var(--font-display); font-size: clamp(26px,4vw,44px); font-weight: 800; letter-spacing: -0.005em; line-height: 1; text-transform: uppercase; color: var(--cream-text); margin-bottom: 22px; }
-  .case-field { margin-bottom: 20px; max-width: 760px; }
-  .case-field-label { display: block; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
-  .case-field p { font-size: 16px; line-height: 1.55; color: var(--cream-text); }
-  .case-result-wrap { border-top: 1px solid var(--rust); padding-top: 18px; margin-top: 28px; max-width: 760px; }
-  .case-result-wrap .case-field-label { color: var(--rust); }
-  .case-result-wrap p { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--cream-text); }
-  .case-nav { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(243,235,221,0.3); margin-top: 32px; }
-  .case-nav button { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cream-text); background: none; border: none; padding: 14px; cursor: pointer; transition: background 0.2s; }
-  .case-nav button:first-child { border-right: 1px solid rgba(243,235,221,0.3); }
-  .case-nav button:hover { background: rgba(243,235,221,0.08); }
-  .case-nav button:disabled { opacity: 0.35; cursor: default; }
-  .case-nav button:disabled:hover { background: none; }
-
-  /* PRINCIPLES */
-  .principles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-  .principle-card { position: relative; background: var(--paper); padding: 30px 26px; box-shadow: 0 10px 24px rgba(35,31,32,0.1); }
-  .principle-tape { position: absolute; top: -10px; left: 50%; width: 76px; height: 22px; margin-left: -38px; opacity: 0.85; }
-  .principle-card:nth-child(1) .principle-tape { background: repeating-linear-gradient(45deg, #D9CBAE, #D9CBAE 5px, #CBBB98 5px, #CBBB98 10px); transform: rotate(-3deg); }
-  .principle-card:nth-child(2) .principle-tape { background: repeating-linear-gradient(45deg, #E6A89A, #E6A89A 5px, #D98E7D 5px, #D98E7D 10px); transform: rotate(2deg); }
-  .principle-card:nth-child(3) .principle-tape { background: repeating-linear-gradient(45deg, #9FCDD1, #9FCDD1 5px, var(--teal) 5px, var(--teal) 10px); transform: rotate(-2deg); }
-  .principle-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
-  .principle-num { font-family: var(--font-serif); font-weight: 700; font-size: 22px; color: var(--rust); }
-  .principle-name { font-family: var(--font-serif); font-weight: 700; font-size: 21px; color: var(--black); }
-  .principle-desc { font-size: 14.5px; color: var(--text-secondary); line-height: 1.6; }
-
-  /* CLIENTS */
-  .clients-grid { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--black); }
-  .client-logo { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; padding: 18px; border: 1px solid var(--black); }
-  .client-logo img { width: 100%; height: 100%; object-fit: contain; }
-
-  /* CTA */
-  .cta-section { background: var(--rust); border-radius: 4px; padding: 56px 48px 0; overflow: hidden; }
-  .cta-title { font-family: var(--font-display); font-size: clamp(42px,7vw,76px); font-weight: 800; letter-spacing: -0.005em; line-height: 0.9; text-transform: uppercase; color: var(--cream-text); margin-bottom: 36px; }
-  .cta-title .dark { color: var(--black-2); display: block; }
-  .cta-rows { border-top: 1px solid rgba(35,31,32,0.3); }
-  .cta-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 4px; border-bottom: 1px solid rgba(35,31,32,0.3); text-decoration: none; color: inherit; }
-  .cta-row-main { display: flex; flex-direction: column; gap: 4px; }
-  .cta-row-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--black-2); opacity: 0.75; }
-  .cta-row-value { font-family: var(--font-mono); font-weight: 600; font-size: clamp(16px,2.4vw,22px); color: var(--black-2); }
-  .cta-row-arrow { font-size: 20px; color: var(--black-2); flex-shrink: 0; transition: transform 0.2s; }
-  .cta-row:hover .cta-row-arrow { transform: translate(3px,-3px); }
-  .cta-row.hl { background: var(--black-2); margin: 0 -4px; padding-left: 16px; padding-right: 16px; }
-  .cta-row.hl .cta-row-label { color: var(--mid-gray); opacity: 1; }
-  .cta-row.hl .cta-row-value, .cta-row.hl .cta-row-arrow { color: var(--cream-text); }
-  .cta-row.hl .cta-row-arrow { color: var(--teal); }
-  .cta-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(35,31,32,0.7); margin-bottom: 18px; }
-  .cta-footer { display: flex; justify-content: space-between; padding: 22px 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(35,31,32,0.7); }
-
-  /* SCROLL REVEAL: visible by default (safe for no-JS/crawlers/PDF); .js-reveal hides until IntersectionObserver reveals it */
-  .reveal { opacity: 1; transform: none; }
-  .js-reveal .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .js-reveal .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-  @media (max-width: 900px) {
-    .site-nav { padding: 14px 24px; }
-    section { padding: 56px 24px; }
-    .hero { padding: 108px 24px 48px; }
-    .hero-top { margin-bottom: 14px; }
-    .hero-meta { margin-left: 0; flex-direction: column; gap: 4px; }
-    .hero-main { grid-template-columns: 1fr; gap: 28px; }
-    .hero-photo { max-width: 320px; }
-    .exp-summary { margin-top: 0; }
-    .exp-entry { grid-template-columns: 1fr; gap: 10px; }
-    .cases-block { margin: 0 -24px; padding: 48px 24px; }
-    .cases-grid { grid-template-columns: 1fr; gap: 24px; }
+  @media (max-width: 1100px) {
+    .role-btn { grid-template-columns: 1fr auto; row-gap: 6px; }
+    .role-title { grid-column: 1 / -1; }
+    .role-toggle { min-width: 0; }
+    .cases-body { grid-template-columns: 1fr; }
     .cases-index { display: none; }
-    .principles-grid { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: repeat(2,1fr); }
-    .stat-item:nth-child(3) { border-left: none; }
-    .stat-item:nth-child(odd) { border-left: none; }
+    .case { grid-template-columns: 1fr 1fr; gap: 32px; }
   }
-  @media (max-width: 600px) {
-    .site-nav { padding: 12px 20px; }
-    .nav-links { gap: 16px; }
-    .nav-links a:not(.accent) { display: none; }
-    section { padding: 48px 20px; }
-    .hero { padding: 96px 20px 40px; }
-    .cases-block { margin: 0 -20px; padding: 40px 20px; }
-    .clients-grid { grid-template-columns: repeat(3,1fr); }
-    .exp-head { gap: 10px; }
-    .cta-section { padding: 40px 24px 0; }
+
+  /* ---------- MOBILE (by the 390px board) ---------- */
+  @media (max-width: 860px) {
+    :root { --m: clamp(0.85px, calc(100vw / 390), 1.6px); }
+    .d-only { display: none !important; }
+    .m-only { display: initial; }
+    .label { font-size: 9px; }
+
+    .nav { height: auto; padding: 14px 18px 10px; font-size: 9px; }
+    .nav-links { display: none; }
+
+    .hero { padding: 18px 16px 0; }
+    .hero-meta { display: block; }
+    .sheet::after, .nav::after { display: none; }
+    .hero-first { font-size: 28px; line-height: 1; }
+    .hero-name { margin: 10px 0 0; font-size: calc(72 * var(--m)); letter-spacing: -2px; }
+    .hero-grid { grid-template-columns: 1fr 150px; grid-template-areas: "role photo" "about about"; column-gap: 12px; align-items: end; margin-top: 12px; }
+    .hero-role { padding-top: 0; gap: 6px; }
+    .hero-role .label { font-size: 9px; }
+    .hero-role-title { font-size: calc(34 * var(--m)); line-height: 0.95; letter-spacing: 0; text-wrap: wrap; }
+    .hero-photo { margin-top: 0; height: 212px; min-height: 0; display: block; background: repeating-linear-gradient(135deg, var(--stripe-a) 0 10px, var(--stripe-b) 10px 20px); border-bottom: 22px solid var(--teal); }
+    .hero-photo-img, .hero-skills { display: none; }
+    .hero-about { margin-top: 16px; font-size: 16px; }
+    .hero-about .label, .hero-about .italic { display: none; }
+
+    .stats { grid-template-columns: 1fr 1fr; margin: 22px -16px 0; border-bottom: 1px solid var(--ink); }
+    .stat { min-height: 0; padding: 14px 16px; gap: 6px; justify-content: flex-start; }
+    .stat + .stat { border-left: 0; }
+    .stat:nth-child(2), .stat:nth-child(4) { border-left: 1px solid var(--ink); }
+    .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--ink); }
+    .stat-num { font-size: calc(52 * var(--m)); }
+    .stat-label { font-size: 13px; }
+
+    .exp { border-top: 0; }
+    .exp-head { padding: 28px 16px 8px; gap: 4px; }
+    .exp-title-wrap { gap: 4px; }
+    .exp-title { font-size: calc(60 * var(--m)); line-height: 0.85; letter-spacing: -1px; gap: 10px; }
+    .exp-summary { display: none; }
+    .company { grid-template-columns: 1fr; padding: 16px 16px 4px; }
+    .company-side { padding: 0; border-right: 0; flex-direction: row; align-items: baseline; gap: 10px; }
+    .company-num { font-size: 10px; letter-spacing: 0; }
+    .company-name { font-size: calc(44 * var(--m)); letter-spacing: 0; }
+    .company-roles { padding: 0; }
+    .role { border-bottom: 0; border-top: 1px dashed rgba(35,31,32,0.35); margin-top: 10px; }
+    .role-btn { display: flex; flex-direction: column; gap: 4px; padding: 12px 0; min-height: 44px; }
+    .role-title { font-size: 19px; line-height: 1.2; }
+    .role-meta { display: flex; justify-content: space-between; gap: 12px; width: 100%; }
+    .role-period, .role-toggle { font-size: 10px; letter-spacing: 0.06em; min-width: 0; }
+    .ach-list { gap: 10px; padding-bottom: 14px; }
+    .ach { grid-template-columns: 26px 1fr; gap: 4px; font-size: 15px; line-height: 1.5; }
+    .ach-n { font-size: 10px; padding-top: 4px; }
+
+    .cases { padding: 32px 16px 28px; gap: 18px; }
+    .cases-head { gap: 12px; }
+    .cases-word { font-size: calc(68 * var(--m)); line-height: 0.85; letter-spacing: -1px; }
+    .cases-body { grid-template-columns: 1fr; gap: 0; }
+    .cases-index { display: none; }
+    .case { grid-template-columns: 1fr; gap: 18px; }
+    .case-card { padding: 8px; gap: 0; }
+    .case-img { height: 240px; min-height: 0; }
+    .case-caption { display: none; }
+    .case-info { gap: 18px; }
+    .case-title { font-size: calc(34 * var(--m)); line-height: 0.95; text-wrap: wrap; }
+    .case-field { gap: 4px; }
+    .case-field p { font-size: 14px; }
+    .case-result { padding-top: 12px; }
+    .case-result p { font-size: 20px; }
+    .case-nav { display: grid; grid-template-columns: 1fr 1fr; align-self: stretch; }
+    .case-nav button { padding: 14px; }
+
+    .principles { padding: 32px 16px 40px; gap: 22px; }
+    .pr-title { font-size: calc(76 * var(--m)); line-height: 0.85; letter-spacing: -1px; }
+    .pr-title .indent { padding-left: 0; }
+    .pr-grid { grid-template-columns: 1fr; gap: 22px; padding: 0; }
+    .note { padding: 22px 18px 18px; gap: 8px; box-shadow: 0 6px 14px rgba(35,31,32,0.14); }
+    .note:nth-child(1) { transform: rotate(-1deg); }
+    .note:nth-child(2) { transform: rotate(0.8deg); }
+    .note:nth-child(3) { transform: rotate(-0.6deg); }
+    .note:nth-child(1) .tape { top: -10px; width: 80px; height: 20px; margin-left: -40px; box-shadow: none; transform: none; }
+    .note:nth-child(2) .tape { right: 20px; top: -10px; width: 70px; height: 20px; transform: rotate(6deg); }
+    .note:nth-child(3) .tape { left: 24px; top: -10px; width: 70px; height: 20px; transform: rotate(-4deg); }
+    .note-head { display: flex; align-items: baseline; gap: 6px; }
+    .note-num { font-size: 26px; line-height: 1; }
+    .note-title { font-size: 21px; }
+    .note-text { font-size: 14px; line-height: 1.5; }
+
+    .clients { grid-template-columns: 1fr; padding: 28px 16px 32px; gap: 16px; border-bottom: 0; }
+    .clients-head { padding: 0; border-right: 0; }
+    .clients-head .label { display: none; }
+    .clients-title { flex-direction: row; align-items: baseline; gap: 10px; font-size: calc(44 * var(--m)); line-height: 0.85; letter-spacing: 0; }
+    .clients-grid { border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+    .logo { aspect-ratio: 1 / 1; padding: 8px; }
+
+    .contact { padding: 32px 16px 28px; gap: 18px; }
+    .contact-title, .contact-title h2 { gap: 0; }
+    .contact-title .label { display: none; }
+    .contact-big { font-size: calc(56 * var(--m)); line-height: 0.85; letter-spacing: 0; white-space: normal; }
+    .contact-grid { grid-template-columns: 1fr; gap: 8px; }
+    .contact-card { gap: 6px; padding: 14px 16px; }
+    .contact-card-top { font-size: 9px; letter-spacing: 0.12em; }
+    .contact-card-top .arrow { font-size: 16px; }
+    .contact-value { font-size: 28px; white-space: normal; overflow-wrap: anywhere; }
+    .footer { font-size: 9px; padding-top: 10px; }
+  }
+
+  @media (min-width: 861px) {
+    .note-head { display: contents; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
+    .role-detail { transition: none; }
   }
 </style>
 </head>
 <body>
+<div class="sheet">
 
-<nav class="site-nav">
-  <a href="#" class="nav-logo">Иван Староверов · Digital Marketing · BDM</a>
-  <ul class="nav-links">
-    <li><a href="#experience">Опыт</a></li>
-    <li><a href="#cases">Кейсы</a></li>
-    <li><a href="#principles">Подход</a></li>
-    <li><a href="#clients">Клиенты</a></li>
-    <li><a href="#contact" class="accent">Контакты →</a></li>
-  </ul>
+<nav class="nav" aria-label="Основная навигация">
+  <span class="d-only">Иван Староверов · Digital Marketing · BDM</span>
+  <span class="m-only">Портфолио № 01</span>
+  <div class="nav-links">
+    <a href="#experience">Опыт</a>
+    <a href="#cases">Кейсы</a>
+    <a href="#principles">Подход</a>
+    <a href="#clients">Клиенты</a>
+    <a href="#contact" class="accent">Контакты →</a>
+  </div>
+  <a href="#contact" class="m-only">Связаться →</a>
 </nav>
 
-<div class="hero">
-  <div class="hero-top reveal">
-    <div class="hero-name-sm">Иван</div>
-    <div class="hero-meta">
-      <span>Портфолио № 01</span>
-      <span>VK · Kaspersky · Яндекс</span>
-      <span>2021 — сейчас</span>
+<header class="hero">
+  <div class="hero-meta">
+    <span class="hero-first">Иван</span>
+    <span class="d-only">Портфолио № 01</span>
+    <span class="d-only">VK · Kaspersky · Яндекс</span>
+    <span class="d-only">2021 — сейчас</span>
+  </div>
+  <h1 class="hero-name display">Староверов</h1>
+  <div class="hero-grid">
+    <div class="hero-role">
+      <span class="label">— Должность</span>
+      <p class="hero-role-title display">Менеджер по работе <span>с партнерами</span></p>
+    </div>
+    <div class="hero-about">
+      <span class="label">— О себе</span>
+      <p>Специалист по партнёрскому маркетингу и маркетинговой аналитике с 5+ годами опыта в крупнейших IT-компаниях.</p>
+      <p class="italic">Запускаю performance- и медийные кампании, строю партнёрства, нахожу точки роста через данные.</p>
+    </div>
+    <div class="hero-photo" aria-hidden="true">
+      <div class="hero-photo-img"><span>фото · портрет</span></div>
+      <div class="hero-skills"><span>Партнёрский маркетинг</span><span>Аналитика</span></div>
     </div>
   </div>
-  <h1 class="hero-name-lg">Староверов</h1>
-
-  <div class="hero-main">
-    <div>
-      <div class="hero-role-block">
-        <div class="eyebrow">— Должность</div>
-        <div class="hero-role">Менеджер по работе<span class="accent">с партнерами</span></div>
-      </div>
-
-      <div class="hero-about">
-        <div class="eyebrow">— О себе</div>
-        <p>Специалист по партнёрскому маркетингу и маркетинговой аналитике с 5+ годами опыта в крупнейших IT-компаниях.</p>
-        <p class="italic">Запускаю performance- и медийные кампании, строю партнёрства, нахожу точки роста через данные.</p>
-      </div>
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num"><span class="rust">&gt;</span>90</span>
+      <span class="stat-label">Рекламных кампаний запущено и оптимизировано</span>
     </div>
+    <div class="stat">
+      <span class="stat-num">35<span class="rust small">М ₽</span></span>
+      <span class="stat-label">Рекламные бюджеты до полугода</span>
+    </div>
+    <div class="stat hl">
+      <span class="stat-num">50+</span>
+      <span class="stat-label">Партнеров: FMCG, Банки, E-com, Travel, IT</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5<span class="rust">+</span></span>
+      <span class="stat-label">Лет опыта в крупнейших IT-компаниях</span>
+    </div>
+  </div>
+</header>
 
-    <div class="hero-photo">
-      <div class="hero-photo-box"><span>Фото · Портрет</span></div>
-      <div class="skills-bar">
-        <span>Партнёрский маркетинг</span>
-        <span>Аналитика</span>
+<section class="exp" id="experience">
+  <div class="exp-head reveal">
+    <div class="exp-title-wrap">
+      <span class="label">+ <span class="d-only">Раздел </span>02 · Карьера</span>
+      <h2 class="exp-title display"><span class="rust">Опыт</span><span>работы</span></h2>
+    </div>
+    <div class="exp-summary">
+      <p>3 компании, 4 должности. Нажмите на должность, чтобы раскрыть достижения.</p>
+      <button class="exp-all" type="button" aria-expanded="false">+ Раскрыть всё</button>
+    </div>
+  </div>
+
+  <div class="company reveal">
+    <div class="company-side">
+      <span class="company-num">01</span>
+      <span class="company-name display">VK</span>
+    </div>
+    <div class="company-roles">
+      <div class="role">
+        <button class="role-btn" type="button" aria-expanded="false">
+          <span class="role-title">Менеджер по развитию бизнеса</span>
+          <span class="role-meta"><span class="role-period">май 2025 — сейчас</span> <span class="role-toggle" data-n="4 достижения">+ 4 достижения</span></span>
+        </button>
+        <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
+          <div class="ach"><span class="ach-n">01</span><span>Привлёк 20+ новых партнёров и вел переговоры на уровне CEO и CMO — сформировал стабильный портфель клиентов и принёс 50+ млн руб. выручки.</span></div>
+          <div class="ach"><span class="ach-n">02</span><span>Разработал индивидуальные офферы и медиапланы под KPI партнёров из 5 вертикалей (Банки, FMCG, E-com, Travel, IT) с бюджетами до 35 млн руб. Согласовал бизнес-цели, защитил стратегии размещения, выстроил долгосрочные отношения с ключевыми ЛПР.</span></div>
+          <div class="ach"><span class="ach-n">03</span><span>Реализовал 40+ спецпроектов от концепции и постановки KPI до запуска и постаналитики; оптимизировал кампании на основе анализа метрик CTR, CPM, CPC, CPA, выявлял точки роста и повышал конверсию.</span></div>
+          <div class="ach"><span class="ach-n">04</span><span>Провёл кастдев-интервью с партнёрами, выявил барьеры и сформировал точечные предложения для партнеров.</span></div>
+        </div></div></div>
       </div>
     </div>
   </div>
 
-  <div class="stats-grid">
-    <div class="stat-item">
-      <div class="stat-number"><span class="accent">&gt;</span>90</div>
-      <div class="stat-label">Рекламных кампаний запущено и оптимизировано</div>
+  <div class="company reveal">
+    <div class="company-side">
+      <span class="company-num">02</span>
+      <span class="company-name display">Kaspersky</span>
     </div>
-    <div class="stat-item">
-      <div class="stat-number">35<span class="accent">М ₽</span></div>
-      <div class="stat-label">Рекламные бюджеты до полугода</div>
-    </div>
-    <div class="stat-item hl">
-      <div class="stat-number">50<span class="accent">+</span></div>
-      <div class="stat-label">Партнеров: FMCG, Банки, E-com, Travel, IT</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">5<span class="accent">+</span></div>
-      <div class="stat-label">Лет опыта в крупнейших IT-компаниях</div>
-    </div>
-  </div>
-</div>
-
-<section id="experience">
-  <div class="reveal"><p class="eyebrow"><span class="n">+ Раздел 02</span> · Карьера</p></div>
-  <div class="reveal"><h2 class="section-title">Опыт<br><span class="accent">работы</span></h2></div>
-  <div class="reveal exp-summary">
-    <p>3 компании, 4 должности. Нажмите на должность, чтобы раскрыть достижения.</p>
-    <button class="exp-expand-all" type="button">+ Раскрыть всё</button>
-  </div>
-  <div class="exp-list">
-    <div class="exp-entry reveal">
-      <div class="exp-head"><span class="exp-num mono">01</span><span class="exp-company">VK</span></div>
-      <div class="exp-roles">
-        <div class="exp-role-row" tabindex="0" role="button" aria-expanded="false">
-          <span class="exp-role-title">Менеджер по развитию бизнеса</span>
-          <span class="exp-role-meta"><span class="exp-role-period">май 2025 — сейчас</span><span class="exp-role-toggle">+ 4 достижения</span></span>
-        </div>
-        <div class="exp-detail"><div class="exp-detail-inner"><ul>
-          <li>Привлёк 20+ новых партнёров и вел переговоры на уровне CEO и CMO — сформировал стабильный портфель клиентов и принёс 50+ млн руб. выручки.</li>
-          <li>Разработал индивидуальные офферы и медиапланы под KPI партнёров из 5 вертикалей (Банки, FMCG, E-com, Travel, IT) с бюджетами до 35 млн руб. Согласовал бизнес-цели, защитил стратегии размещения, выстроил долгосрочные отношения с ключевыми ЛПР.</li>
-          <li>Реализовал 40+ спецпроектов от концепции и постановки KPI до запуска и постаналитики; оптимизировал кампании на основе анализа метрик CTR, CPM, CPC, CPA, выявлял точки роста и повышал конверсию.</li>
-          <li>Провёл кастдев-интервью с партнёрами, выявил барьеры и сформировал точечные предложения для партнеров.</li>
-        </ul></div></div>
+    <div class="company-roles">
+      <div class="role">
+        <button class="role-btn" type="button" aria-expanded="false">
+          <span class="role-title">Специалист по поддержке продаж</span>
+          <span class="role-meta"><span class="role-period">апр. 2023 — май 2025</span> <span class="role-toggle" data-n="4 достижения">+ 4 достижения</span></span>
+        </button>
+        <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
+          <div class="ach"><span class="ach-n">01</span><span>Запустил более 50 партнёрских маркетинговых кампаний (B2B и B2C), которые увеличили среднюю конверсию на 20%.</span></div>
+          <div class="ach"><span class="ach-n">02</span><span>Повысил Retention клиентов через renewal-кампании в нескольких регионах — разработал механики продления, контролировал корректность цен и своевременность скидок; кампании вошли в оптимизацию, принёсшую $12 млн дополнительной выручки.</span></div>
+          <div class="ach"><span class="ach-n">03</span><span>Провёл 5 A/B-тестирований CTA-элементов и механик воронки продаж, зафиксирован рост кликов до 15%.</span></div>
+          <div class="ach"><span class="ach-n">04</span><span>Координировал операционную деятельность в Jira и Confluence: расстановка приоритетов, постановка задач кросс-команды, контроль сроков, оптимизация процессов.</span></div>
+        </div></div></div>
+      </div>
+      <div class="role">
+        <button class="role-btn" type="button" aria-expanded="false">
+          <span class="role-title">Маркетолог</span>
+          <span class="role-meta"><span class="role-period">март 2022 — март 2023</span> <span class="role-toggle" data-n="3 достижения">+ 3 достижения</span></span>
+        </button>
+        <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
+          <div class="ach"><span class="ach-n">01</span><span>Создал маркетинговые материалы (email-рассылки, баннеры, лендинги), которые повысили CTR на 3% и open rate на 5%.</span></div>
+          <div class="ach"><span class="ach-n">02</span><span>Организовал международное оффлайн мероприятие GITEX Dubai, которое привлекло 200+ квалифицированных B2B-лидов.</span></div>
+          <div class="ach"><span class="ach-n">03</span><span>Разработал и реализовал маркетинговые кампании, обеспечившие рост выручки в регионе META на 10% за год.</span></div>
+        </div></div></div>
       </div>
     </div>
+  </div>
 
-    <div class="exp-entry reveal">
-      <div class="exp-head"><span class="exp-num mono">02</span><span class="exp-company">Kaspersky</span></div>
-      <div class="exp-roles">
-        <div class="exp-role-row" tabindex="0" role="button" aria-expanded="false">
-          <span class="exp-role-title">Специалист по поддержке продаж</span>
-          <span class="exp-role-meta"><span class="exp-role-period">апр. 2023 — май 2025</span><span class="exp-role-toggle">+ 4 достижения</span></span>
-        </div>
-        <div class="exp-detail"><div class="exp-detail-inner"><ul>
-          <li>Запустил более 50 партнёрских маркетинговых кампаний (B2B и B2C), которые увеличили среднюю конверсию на 20%.</li>
-          <li>Повысил Retention клиентов через renewal-кампании в нескольких регионах — разработал механики продления, контролировал корректность цен и своевременность скидок; кампании вошли в оптимизацию, принёсшую $12 млн дополнительной выручки.</li>
-          <li>Провёл 5 A/B-тестирований CTA-элементов и механик воронки продаж, зафиксирован рост кликов до 15%.</li>
-          <li>Координировал операционную деятельность в Jira и Confluence: расстановка приоритетов, постановка задач кросс-команды, контроль сроков, оптимизация процессов.</li>
-        </ul></div></div>
-        <div class="exp-role-row" tabindex="0" role="button" aria-expanded="false">
-          <span class="exp-role-title">Маркетолог</span>
-          <span class="exp-role-meta"><span class="exp-role-period">март 2022 — март 2023</span><span class="exp-role-toggle">+ 3 достижения</span></span>
-        </div>
-        <div class="exp-detail"><div class="exp-detail-inner"><ul>
-          <li>Создал маркетинговые материалы (email-рассылки, баннеры, лендинги), которые повысили CTR на 3% и open rate на 5%.</li>
-          <li>Организовал международное оффлайн мероприятие GITEX Dubai, которое привлекло 200+ квалифицированных B2B-лидов.</li>
-          <li>Разработал и реализовал маркетинговые кампании, обеспечившие рост выручки в регионе META на 10% за год.</li>
-        </ul></div></div>
-      </div>
+  <div class="company reveal">
+    <div class="company-side">
+      <span class="company-num">03</span>
+      <span class="company-name display">Яндекс</span>
     </div>
-
-    <div class="exp-entry reveal">
-      <div class="exp-head"><span class="exp-num mono">03</span><span class="exp-company">Яндекс</span></div>
-      <div class="exp-roles">
-        <div class="exp-role-row" tabindex="0" role="button" aria-expanded="false">
-          <span class="exp-role-title">Рекрутер</span>
-          <span class="exp-role-meta"><span class="exp-role-period">авг. 2021 — март 2022</span><span class="exp-role-toggle">+ 1 достижение</span></span>
-        </div>
-        <div class="exp-detail"><div class="exp-detail-inner"><ul>
-          <li>Закрыл 10 IT-позиций через активный поиск, скрининг и переговоры с кандидатами.</li>
-        </ul></div></div>
+    <div class="company-roles">
+      <div class="role">
+        <button class="role-btn" type="button" aria-expanded="false">
+          <span class="role-title">Рекрутер</span>
+          <span class="role-meta"><span class="role-period">авг. 2021 — март 2022</span> <span class="role-toggle" data-n="1 достижение">+ 1 достижение</span></span>
+        </button>
+        <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
+          <div class="ach"><span class="ach-n">01</span><span>Закрыл 10 IT-позиций через активный поиск, скрининг и переговоры с кандидатами.</span></div>
+        </div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="cases-block reveal" id="cases">
-  <p class="eyebrow"><span class="n">+ Раздел 03</span> · Портфолио</p>
-  <div class="cases-head">
-    <h2 class="section-title" style="margin-bottom:0">Кейсы</h2>
-    <div class="cases-head-line"></div>
-    <div class="cases-counter mono" id="caseCounter">01 / 05</div>
+<section class="cases" id="cases">
+  <div class="cases-head reveal">
+    <span class="d-only">+ Раздел 03 · Портфолио</span>
+    <span class="rule d-only"></span>
+    <h2 class="cases-word">Кейсы</h2>
+    <span class="rule"></span>
+    <span class="cases-counter" id="caseCounter">01 / 05</span>
   </div>
 
-  <div class="cases-grid">
-    <nav class="cases-index" id="casesIndex">
-      <button class="cases-index-item" data-i="0"><span class="i mono">01</span><span>Марафон Т-Банк в Одноклассниках</span></button>
-      <button class="cases-index-item" data-i="1"><span class="i mono">02</span><span>Интерактивный спецпроект Tiswell</span></button>
-      <button class="cases-index-item" data-i="2"><span class="i mono">03</span><span>Молодёжная карта Сбера</span></button>
-      <button class="cases-index-item" data-i="3"><span class="i mono">04</span><span>Кейс 4 — жду детали от тебя</span></button>
-      <button class="cases-index-item" data-i="4"><span class="i mono">05</span><span>Кейс 5 — жду детали от тебя</span></button>
-    </nav>
+  <div class="cases-body reveal">
+    <div class="cases-index" id="casesIndex">
+      <button type="button" class="active" data-i="0"><span class="n">01</span><span class="t">Марафон T-Банк в Одноклассниках</span></button>
+      <button type="button" data-i="1"><span class="n">02</span><span class="t">Интерактивный спецпроект Tiswell</span></button>
+      <button type="button" data-i="2"><span class="n">03</span><span class="t">Молодёжная карта Сбера</span></button>
+      <button type="button" data-i="3"><span class="n">04</span><span class="t">Кейс 4 — жду детали от тебя</span></button>
+      <button type="button" data-i="4"><span class="n">05</span><span class="t">Кейс 5 — жду детали от тебя</span></button>
+    </div>
 
-    <div class="cases-active">
-      <div id="caseSlides">
-        <div class="case-slide">
-          <div class="case-img-wrap"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Марафон T-Банк" loading="lazy"></div>
-          <div class="case-img-caption mono"><span>Кейс № 01</span><span>01 / 05</span></div>
+    <div id="caseSlides">
+      <article class="case">
+        <div class="case-card">
+          <div class="case-img"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Марафон T-Банк в Одноклассниках" loading="lazy"></div>
+          <div class="case-caption"><span>Кейс № 01</span><span>01 / 05</span></div>
+        </div>
+        <div class="case-info">
           <h3 class="case-title">Марафон T-Банк в Одноклассниках</h3>
-          <div class="case-field"><span class="case-field-label">Задача</span><p>Анонсирование Фото-марафона на 8 марта с целью "Поздравить женщин и напомнить о кэшбэке Т-Банк при покупке подарков".</p></div>
-          <div class="case-field"><span class="case-field-label">Вклад</span><p>Провел анализ CTR по промо-материалам. Заменил креативы и CTA на более конкретные призывы к участию.</p></div>
-          <div class="case-result-wrap"><span class="case-field-label">Результат</span><p>+28% перевыполнение кол-ва участников марафона</p></div>
+          <div class="case-field"><span class="label">Задача</span><p>Анонсирование Фото-марафона на 8 марта с целью "Поздравить женщин и напомнить о кэшбэке Т-Банк при покупке подарков".</p></div>
+          <div class="case-field"><span class="label">Вклад</span><p>Провел анализ CTR по промо-материалам. Заменил креативы и CTA на более конкретные призывы к участию.</p></div>
+          <div class="case-field case-result"><span class="label">Результат</span><p>+28% перевыполнение кол-ва участников марафона</p></div>
+          <div class="case-nav"><button type="button" class="case-prev">‹ Назад</button><button type="button" class="case-next">Вперёд ›</button></div>
         </div>
-        <div class="case-slide" hidden>
-          <div class="case-img-wrap"><img src="https://i.ibb.co/NnTXK11G/Frame-10-2.png" alt="Спецпроект Tiswell" loading="lazy"></div>
-          <div class="case-img-caption mono"><span>Кейс № 02</span><span>02 / 05</span></div>
+      </article>
+      <article class="case" hidden>
+        <div class="case-card">
+          <div class="case-img"><img src="https://i.ibb.co/NnTXK11G/Frame-10-2.png" alt="Интерактивный спецпроект Tiswell" loading="lazy"></div>
+          <div class="case-caption"><span>Кейс № 02</span><span>02 / 05</span></div>
+        </div>
+        <div class="case-info">
           <h3 class="case-title">Интерактивный спецпроект Tiswell</h3>
-          <div class="case-field"><span class="case-field-label">Задача</span><p>Медийная кампания + рост продаж зубной пасты на Ozon.</p></div>
-          <div class="case-field"><span class="case-field-label">Вклад</span><p>Согласование идей, форматов и креативов, запуск более интерактивной и виральной механики.</p></div>
-          <div class="case-result-wrap"><span class="case-field-label">Результат</span><p>+32% перевыполнения по переходам на страницу товара</p></div>
+          <div class="case-field"><span class="label">Задача</span><p>Медийная кампания + рост продаж зубной пасты на Ozon.</p></div>
+          <div class="case-field"><span class="label">Вклад</span><p>Согласование идей, форматов и креативов, запуск более интерактивной и виральной механики.</p></div>
+          <div class="case-field case-result"><span class="label">Результат</span><p>+32% перевыполнения по переходам на страницу товара</p></div>
+          <div class="case-nav"><button type="button" class="case-prev">‹ Назад</button><button type="button" class="case-next">Вперёд ›</button></div>
         </div>
-        <div class="case-slide" hidden>
-          <div class="case-img-wrap"><img src="https://i.ibb.co/sdtSF9ZY/Post-keshbek-erid.png" alt="Молодёжная карта Сбера" loading="lazy"></div>
-          <div class="case-img-caption mono"><span>Кейс № 03</span><span>03 / 05</span></div>
+      </article>
+      <article class="case" hidden>
+        <div class="case-card">
+          <div class="case-img"><img src="https://i.ibb.co/sdtSF9ZY/Post-keshbek-erid.png" alt="Молодёжная карта Сбера" loading="lazy"></div>
+          <div class="case-caption"><span>Кейс № 03</span><span>03 / 05</span></div>
+        </div>
+        <div class="case-info">
           <h3 class="case-title">Молодёжная карта Сбера</h3>
-          <div class="case-field"><span class="case-field-label">Задача</span><p>Продвижение дебетовой карты на аудиторию 14–24 года.</p></div>
-          <div class="case-field"><span class="case-field-label">Вклад</span><p>Анализ результатов размещения после первой недели, перенастройка таргета, изменение слоганов и креативов.</p></div>
-          <div class="case-result-wrap"><span class="case-field-label">Результат</span><p>х2 рост числа заявок после оптимизации</p></div>
+          <div class="case-field"><span class="label">Задача</span><p>Продвижение дебетовой карты на аудиторию 14–24 года.</p></div>
+          <div class="case-field"><span class="label">Вклад</span><p>Анализ результатов размещения после первой недели, перенастройка таргета, изменение слоганов и креативов.</p></div>
+          <div class="case-field case-result"><span class="label">Результат</span><p>х2 рост числа заявок после оптимизации</p></div>
+          <div class="case-nav"><button type="button" class="case-prev">‹ Назад</button><button type="button" class="case-next">Вперёд ›</button></div>
         </div>
-        <div class="case-slide" hidden>
-          <div class="case-img-wrap"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Кейс 4" loading="lazy"></div>
-          <div class="case-img-caption mono"><span>Кейс № 04</span><span>04 / 05</span></div>
+      </article>
+      <article class="case" hidden>
+        <div class="case-card">
+          <div class="case-img"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Кейс 4" loading="lazy"></div>
+          <div class="case-caption"><span>Кейс № 04</span><span>04 / 05</span></div>
+        </div>
+        <div class="case-info">
           <h3 class="case-title">Кейс 4 — жду детали от тебя</h3>
-          <div class="case-field"><span class="case-field-label">Задача</span><p>—</p></div>
-          <div class="case-field"><span class="case-field-label">Вклад</span><p>—</p></div>
-          <div class="case-result-wrap"><span class="case-field-label">Результат</span><p>—</p></div>
+          <div class="case-field"><span class="label">Задача</span><p>—</p></div>
+          <div class="case-field"><span class="label">Вклад</span><p>—</p></div>
+          <div class="case-field case-result"><span class="label">Результат</span><p>—</p></div>
+          <div class="case-nav"><button type="button" class="case-prev">‹ Назад</button><button type="button" class="case-next">Вперёд ›</button></div>
         </div>
-        <div class="case-slide" hidden>
-          <div class="case-img-wrap"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Кейс 5" loading="lazy"></div>
-          <div class="case-img-caption mono"><span>Кейс № 05</span><span>05 / 05</span></div>
+      </article>
+      <article class="case" hidden>
+        <div class="case-card">
+          <div class="case-img"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Кейс 5" loading="lazy"></div>
+          <div class="case-caption"><span>Кейс № 05</span><span>05 / 05</span></div>
+        </div>
+        <div class="case-info">
           <h3 class="case-title">Кейс 5 — жду детали от тебя</h3>
-          <div class="case-field"><span class="case-field-label">Задача</span><p>—</p></div>
-          <div class="case-field"><span class="case-field-label">Вклад</span><p>—</p></div>
-          <div class="case-result-wrap"><span class="case-field-label">Результат</span><p>—</p></div>
+          <div class="case-field"><span class="label">Задача</span><p>—</p></div>
+          <div class="case-field"><span class="label">Вклад</span><p>—</p></div>
+          <div class="case-field case-result"><span class="label">Результат</span><p>—</p></div>
+          <div class="case-nav"><button type="button" class="case-prev">‹ Назад</button><button type="button" class="case-next">Вперёд ›</button></div>
         </div>
-      </div>
-
-      <div class="case-nav">
-        <button id="casePrev" type="button">‹ Назад</button>
-        <button id="caseNext" type="button">Вперёд ›</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section id="principles">
-  <div class="reveal"><p class="eyebrow"><span class="n">+ Раздел 04</span> · Подход</p></div>
-  <div class="reveal"><h2 class="section-title"><span class="accent">Принципы</span><br>в работе</h2></div>
-  <div class="principles-grid">
-    <div class="principle-card reveal">
-      <div class="principle-tape"></div>
-      <div class="principle-head"><span class="principle-num">01</span><span class="principle-name">Data-informed</span></div>
-      <div class="principle-desc">Аналитика — главный советник. Каждая гипотеза проверяется через метрики. Важно смотреть на показатели и использовать их как аргумент в принятии решений.</div>
-    </div>
-    <div class="principle-card reveal">
-      <div class="principle-tape"></div>
-      <div class="principle-head"><span class="principle-num">02</span><span class="principle-name">Стратегическое мышление</span></div>
-      <div class="principle-desc">Важно понимать, для чего направлена рекламная кампания. Можно получить сиюминутный результат, а можно построить механизм, который работает стабильно и прогнозируемо.</div>
-    </div>
-    <div class="principle-card reveal">
-      <div class="principle-tape"></div>
-      <div class="principle-head"><span class="principle-num">03</span><span class="principle-name">Критическое мышление</span></div>
-      <div class="principle-desc">Больше вопросов — меньше ошибок. «Какая цель?», «Точно ли это надо?», «Точно ли это сработает?» — такой подход помогает находить более точные и выигрышные решения.</div>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="clients">
-  <div class="reveal"><p class="eyebrow"><span class="n">+ Раздел 05</span> · Партнёры</p></div>
-  <div class="reveal"><h2 class="section-title"><span class="accent">С кем я</span><br>работал?</h2></div>
+<section class="principles" id="principles">
+  <div class="exp-title-wrap reveal">
+    <span class="label d-only">+ Раздел 04 · Подход</span>
+    <h2 class="pr-title display"><span class="rust">Принципы</span><span class="indent">в работе</span></h2>
+  </div>
+  <div class="pr-grid reveal">
+    <div class="note">
+      <span class="tape" aria-hidden="true"></span>
+      <div class="note-head"><span class="note-num">01</span><h3 class="note-title">Data-informed</h3></div>
+      <p class="note-text">Аналитика — главный советник. Каждая гипотеза проверяется через метрики. Важно смотреть на показатели и использовать их как аргумент в принятии решений.</p>
+    </div>
+    <div class="note">
+      <span class="tape" aria-hidden="true"></span>
+      <div class="note-head"><span class="note-num">02</span><h3 class="note-title">Стратегическое мышление</h3></div>
+      <p class="note-text">Важно понимать, для чего направлена рекламная кампания. Можно получить сиюминутный результат, а можно построить механизм, который работает стабильно и прогнозируемо.</p>
+    </div>
+    <div class="note">
+      <span class="tape" aria-hidden="true"></span>
+      <div class="note-head"><span class="note-num">03</span><h3 class="note-title">Критическое мышление</h3></div>
+      <p class="note-text">Больше вопросов — меньше ошибок. «Какая цель?», «Точно ли это надо?», «Точно ли это сработает?» — такой подход помогает находить более точные и выигрышные решения.</p>
+    </div>
+  </div>
+</section>
+
+<section class="clients" id="clients">
+  <div class="clients-head reveal">
+    <span class="label">+ Раздел 05 · Партнёры</span>
+    <h2 class="clients-title display"><span class="rust">С кем я</span><span>работал?</span></h2>
+  </div>
   <div class="clients-grid reveal">
-    <div class="client-logo" style="background:#FFFFFF"><img src="https://i.ibb.co/d4YJXvVd/png-klev-club-ddp9-p-2.png" alt="Сбер" loading="lazy"></div>
-    <div class="client-logo" style="background:#1FA85C"><img src="https://i.ibb.co/LXHmq9pC/kaspersky-rebranding-2.png" alt="Kaspersky" loading="lazy"></div>
-    <div class="client-logo" style="background:#FFDD2D"><img src="https://i.ibb.co/dw3zLV2p/2238e3ca-e3e7-41d0-b.webp" alt="Т-Банк" loading="lazy"></div>
-    <div class="client-logo" style="background:#FF7A1A"><img src="https://i.ibb.co/gbnDg66j/Instagram-story-10.jpg" alt="MyBox" loading="lazy"></div>
-    <div class="client-logo" style="background:#6F2DA8"><img src="https://i.ibb.co/PvgzgzqJ/unnamed-2.png" alt="Kitfort" loading="lazy"></div>
-    <div class="client-logo" style="background:#FFFFFF"><img src="https://i.ibb.co/RkYjbHDH/unnamed.png" alt="Литрес" loading="lazy"></div>
-    <div class="client-logo" style="background:#FFFFFF"><img src="https://i.ibb.co/21hbTr1k/fbe0dqow-3.jpg" alt="ЮниРусь" loading="lazy"></div>
-    <div class="client-logo" style="background:#D6F000"><img src="https://i.ibb.co/zHXrD5Vb/b13cfa226864851-Y3-Jvc-2.png" alt="Level Travel" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/d4YJXvVd/png-klev-club-ddp9-p-2.png" alt="Сбер" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/LXHmq9pC/kaspersky-rebranding-2.png" alt="Kaspersky" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/dw3zLV2p/2238e3ca-e3e7-41d0-b.webp" alt="Т-Банк" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/gbnDg66j/Instagram-story-10.jpg" alt="MyBox" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/PvgzgzqJ/unnamed-2.png" alt="Kitfort" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/RkYjbHDH/unnamed.png" alt="Литрес" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/21hbTr1k/fbe0dqow-3.jpg" alt="ЮниРусь" loading="lazy"></div>
+    <div class="logo"><img src="https://i.ibb.co/zHXrD5Vb/b13cfa226864851-Y3-Jvc-2.png" alt="Level Travel" loading="lazy"></div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="cta-section reveal">
-    <p class="cta-eyebrow"><span class="n">+ Раздел 06</span> · Контакты</p>
-    <h2 class="cta-title">Давайте работать<span class="dark">вместе</span></h2>
-    <div class="cta-rows">
-      <a href="mailto:istaroverov71@gmail.com" class="cta-row">
-        <span class="cta-row-main"><span class="cta-row-label">01 · Email</span><span class="cta-row-value">istaroverov71@gmail.com</span></span>
-        <span class="cta-row-arrow">↗</span>
-      </a>
-      <a href="tel:+79851160775" class="cta-row">
-        <span class="cta-row-main"><span class="cta-row-label">02 · Телефон</span><span class="cta-row-value">+7 985 116-07-75</span></span>
-        <span class="cta-row-arrow">↗</span>
-      </a>
-      <a href="https://t.me/istaroverov7" target="_blank" class="cta-row hl">
-        <span class="cta-row-main"><span class="cta-row-label">03 · Telegram</span><span class="cta-row-value">@istaroverov7</span></span>
-        <span class="cta-row-arrow">↗</span>
-      </a>
-      <a href="https://www.linkedin.com/in/ivan-staroverov-2721a21bb/" target="_blank" class="cta-row">
-        <span class="cta-row-main"><span class="cta-row-label">04 · LinkedIn</span><span class="cta-row-value">Ivan Staroverov</span></span>
-        <span class="cta-row-arrow">↗</span>
-      </a>
-    </div>
-    <div class="cta-footer">
-      <span>&copy; <span id="year">2026</span> Иван Староверов — Портфолио</span>
-      <span>Москва</span>
-    </div>
+<section class="contact" id="contact">
+  <div class="contact-title reveal">
+    <span class="label">+ Раздел 06 · Контакты</span>
+    <h2 class="display"><span class="contact-big">Давайте работать</span><span class="contact-big dark">вместе</span></h2>
   </div>
+  <div class="contact-grid reveal">
+    <a class="contact-card" href="mailto:istaroverov71@gmail.com">
+      <span class="contact-card-top"><span>01 · Email</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-value">istaroverov71@gmail.com</span>
+    </a>
+    <a class="contact-card" href="tel:+79851160775">
+      <span class="contact-card-top"><span>02 · Телефон</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-value">+7 985 116-07-75</span>
+    </a>
+    <a class="contact-card dark" href="https://t.me/istaroverov7" target="_blank" rel="noopener">
+      <span class="contact-card-top"><span>03 · Telegram</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-value">@istaroverov7</span>
+    </a>
+    <a class="contact-card" href="https://www.linkedin.com/in/ivan-staroverov-2721a21bb/" target="_blank" rel="noopener">
+      <span class="contact-card-top"><span>04 · LinkedIn</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-value">Ivan Staroverov</span>
+    </a>
+  </div>
+  <footer class="footer">
+    <span>© <span id="year">2026</span> Иван Староверов — Портфолио</span>
+    <span>Москва</span>
+  </footer>
 </section>
+
+</div>
 
 <script>
 (function() {
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Clicking any experience role row expands achievement bullets on ALL rows at
-  // once, and it stays open (independent of scroll/hover) until clicked again.
-  var expList = document.querySelector('.exp-list');
-  var expRows = document.querySelectorAll('.exp-role-row');
-  var expandAllBtn = document.querySelector('.exp-expand-all');
-  if (expList && expRows.length) {
-    var allExpanded = false;
-    var toggleTexts = Array.prototype.map.call(expRows, function(row) {
-      return row.querySelector('.exp-role-toggle').textContent;
+  // Any role click (or the "expand all" button) opens every achievement list at once.
+  var exp = document.querySelector('.exp');
+  var roleBtns = document.querySelectorAll('.role-btn');
+  var allBtn = document.querySelector('.exp-all');
+  var open = false;
+  function toggleAll() {
+    open = !open;
+    exp.classList.toggle('open', open);
+    roleBtns.forEach(function(btn) {
+      btn.setAttribute('aria-expanded', String(open));
+      var t = btn.querySelector('.role-toggle');
+      t.textContent = (open ? '− ' : '+ ') + t.getAttribute('data-n');
     });
-    var toggleAll = function() {
-      allExpanded = !allExpanded;
-      expList.classList.toggle('all-expanded', allExpanded);
-      expRows.forEach(function(row, i) {
-        row.setAttribute('aria-expanded', allExpanded ? 'true' : 'false');
-        row.querySelector('.exp-role-toggle').textContent = allExpanded ? '— Скрыть' : toggleTexts[i];
-      });
-      if (expandAllBtn) {
-        expandAllBtn.textContent = allExpanded ? '− Свернуть всё' : '+ Раскрыть всё';
-      }
-    };
-    expRows.forEach(function(row) {
-      row.addEventListener('click', toggleAll);
-      row.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleAll();
-        }
-      });
-    });
-    if (expandAllBtn) {
-      expandAllBtn.addEventListener('click', toggleAll);
-    }
+    allBtn.setAttribute('aria-expanded', String(open));
+    allBtn.textContent = open ? '− Свернуть всё' : '+ Раскрыть всё';
   }
+  roleBtns.forEach(function(btn) { btn.addEventListener('click', toggleAll); });
+  allBtn.addEventListener('click', toggleAll);
 
-  function init() {
-    var targets = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      targets.forEach(function(el) { el.classList.add('visible'); });
-      return;
-    }
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -60px 0px' });
-    targets.forEach(function(el) { observer.observe(el); });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-
-(function() {
-  var slidesWrap = document.getElementById('caseSlides');
-  var prevBtn = document.getElementById('casePrev');
-  var nextBtn = document.getElementById('caseNext');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('#caseSlides .case'));
+  var indexBtns = document.querySelectorAll('#casesIndex button');
   var counter = document.getElementById('caseCounter');
-  var indexItems = document.querySelectorAll('.cases-index-item');
-  if (!slidesWrap) return;
-
-  var slides = Array.prototype.slice.call(slidesWrap.children);
   var total = slides.length;
-  var index = 0;
-
-  function render() {
-    slides.forEach(function(s, i) { s.hidden = i !== index; });
-    counter.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
-    indexItems.forEach(function(item, i) {
-      item.classList.toggle('active', i === index);
-    });
-  }
-
+  var current = 0;
+  function pad(n) { return String(n).padStart(2, '0'); }
   function goTo(i) {
-    index = ((i % total) + total) % total;
-    render();
+    current = ((i % total) + total) % total;
+    slides.forEach(function(s, k) { s.hidden = k !== current; });
+    indexBtns.forEach(function(b, k) { b.classList.toggle('active', k === current); });
+    counter.textContent = pad(current + 1) + ' / ' + pad(total);
   }
+  document.querySelectorAll('.case-prev').forEach(function(b) { b.addEventListener('click', function() { goTo(current - 1); }); });
+  document.querySelectorAll('.case-next').forEach(function(b) { b.addEventListener('click', function() { goTo(current + 1); }); });
+  indexBtns.forEach(function(b) { b.addEventListener('click', function() { goTo(+b.getAttribute('data-i')); }); });
 
-  prevBtn.addEventListener('click', function() { goTo(index - 1); });
-  nextBtn.addEventListener('click', function() { goTo(index + 1); });
-  indexItems.forEach(function(item) {
-    item.addEventListener('click', function() {
-      goTo(parseInt(item.getAttribute('data-i'), 10));
+  var targets = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(function(el) { el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
-  });
-
-  render();
+  }, { rootMargin: '0px 0px -60px 0px' });
+  targets.forEach(function(el) { io.observe(el); });
 })();
 </script>
 </body>
