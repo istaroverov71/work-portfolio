@@ -68,8 +68,8 @@
   .hero-about .label { font-family: var(--mono); }
   .hero-about .italic { font-style: italic; color: var(--gray); }
   .hero-photo { grid-area: photo; display: flex; flex-direction: column; gap: 6px; }
-  .hero-photo-frame { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #E9E1D2; }
-  .hero-photo-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .hero-photo-frame { position: relative; flex: 1; min-height: 0; }
+  .hero-photo-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
   .hero-skills { background: var(--teal); padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 3px solid var(--ink); margin: 37px -32px 0; }
