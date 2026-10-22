@@ -104,7 +104,7 @@
   .role-toggle { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rust); min-width: 150px; text-align: right; white-space: nowrap; }
   .role-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s ease; }
   .role-detail-inner { overflow: hidden; }
-  .exp.open .role-detail { grid-template-rows: 1fr; }
+  .role.open .role-detail { grid-template-rows: 1fr; }
   .ach-list { display: flex; flex-direction: column; gap: 14px; padding: 0 0 22px; max-width: 720px; }
   .ach { display: grid; grid-template-columns: 40px 1fr; gap: 8px; font-family: var(--serif); font-size: 17px; line-height: 1.55; text-wrap: pretty; }
   .ach-n { font-family: var(--mono); font-size: 11px; padding-top: 5px; color: var(--teal-dark); }
@@ -608,24 +608,30 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Any role click (or the "expand all" button) opens every achievement list at once.
-  var exp = document.querySelector('.exp');
-  var roleBtns = document.querySelectorAll('.role-btn');
+  var roles = Array.prototype.slice.call(document.querySelectorAll('.role'));
   var allBtn = document.querySelector('.exp-all');
-  var open = false;
-  function toggleAll() {
-    open = !open;
-    exp.classList.toggle('open', open);
-    roleBtns.forEach(function(btn) {
-      btn.setAttribute('aria-expanded', String(open));
-      var t = btn.querySelector('.role-toggle');
-      t.textContent = open ? 'Свернуть' : 'Раскрыть';
-    });
-    allBtn.setAttribute('aria-expanded', String(open));
-    allBtn.textContent = open ? '− Свернуть всё' : '+ Раскрыть всё';
+  function setRole(role, open) {
+    role.classList.toggle('open', open);
+    var btn = role.querySelector('.role-btn');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.querySelector('.role-toggle').textContent = open ? 'Свернуть' : 'Раскрыть';
   }
-  roleBtns.forEach(function(btn) { btn.addEventListener('click', toggleAll); });
-  allBtn.addEventListener('click', toggleAll);
+  function syncAllBtn() {
+    var allOpen = roles.every(function(r) { return r.classList.contains('open'); });
+    allBtn.setAttribute('aria-expanded', String(allOpen));
+    allBtn.textContent = allOpen ? '− Свернуть всё' : '+ Раскрыть всё';
+  }
+  roles.forEach(function(role) {
+    role.querySelector('.role-btn').addEventListener('click', function() {
+      setRole(role, !role.classList.contains('open'));
+      syncAllBtn();
+    });
+  });
+  allBtn.addEventListener('click', function() {
+    var openAll = !roles.every(function(r) { return r.classList.contains('open'); });
+    roles.forEach(function(r) { setRole(r, openAll); });
+    syncAllBtn();
+  });
 
   var slides = Array.prototype.slice.call(document.querySelectorAll('#caseSlides .case'));
   var indexBtns = document.querySelectorAll('#casesIndex button');
