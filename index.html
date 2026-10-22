@@ -73,7 +73,6 @@
   .hero-photo { position: absolute; z-index: 4; top: calc(65 * var(--u)); right: -32px; bottom: -37px; width: calc(532 * var(--u)); }
   .hero-photo-frame { position: absolute; inset: 0; overflow: hidden; }
   .hero-photo-frame img { width: 100%; height: auto; }
-  .hero-skills { position: absolute; z-index: 1; left: calc(-150 * var(--u)); bottom: 30px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 18px; background: var(--teal); box-shadow: 0 6px 14px rgba(35,31,32,0.18); transform: rotate(-2.5deg); transform-origin: left bottom; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 3px solid var(--ink); margin: 37px calc(-32px - var(--edge)) 0; padding: 0 var(--edge); }
   .stat { min-height: 150px; padding: 16px 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
@@ -210,13 +209,12 @@
     .sheet::after, .nav::after { display: none; }
     .hero-first { font-size: 28px; line-height: 1; }
     .hero-name { margin: 10px 0 0; font-size: calc(72 * var(--m)); letter-spacing: -2px; }
-    .hero-grid { grid-template-columns: minmax(0, 1fr) 132px; grid-template-areas: "role photo" "about photo"; column-gap: 14px; margin-top: 12px; }
+    .hero-grid { grid-template-columns: minmax(0, 1fr) 156px; grid-template-areas: "role photo" "about photo"; column-gap: 14px; margin-top: 12px; }
     .hero-role { gap: 6px; }
     .hero-role-title { font-size: calc(34 * var(--m)); line-height: 0.95; letter-spacing: 0; text-wrap: wrap; }
-    .hero-photo { position: static; grid-area: photo; width: auto; display: flex; flex-direction: column; border-bottom: 22px solid var(--teal); }
-    .hero-photo-frame { position: relative; flex: 1; min-height: 0; overflow: visible; }
+    .hero-photo { position: relative; inset: auto; grid-area: photo; width: auto; margin: -8px -16px -22px 0; }
+    .hero-photo-frame { position: absolute; inset: 0; overflow: visible; }
     .hero-photo-frame img { position: absolute; inset: 0; height: 100%; object-fit: contain; object-position: 50% 100%; }
-    .hero-skills { display: none; }
     .hero-about { margin-top: 14px; font-size: 15px; max-width: none; }
     .hero-about .italic { display: none; }
 
@@ -298,7 +296,7 @@
   }
 
   @media (min-width: 560px) and (max-width: 860px) {
-    .hero-grid { grid-template-columns: minmax(0, 1fr) 112px; }
+    .hero-grid { grid-template-columns: minmax(0, 1fr) 150px; }
   }
 
   @media (min-width: 861px) {
@@ -344,7 +342,6 @@
     </div>
     <div class="hero-photo">
       <div class="hero-photo-frame"><img src="img/ivan-staroverov.webp" alt="Иван Староверов" width="1024" height="1536" fetchpriority="high"></div>
-      <div class="hero-skills"><span>Партнёрский маркетинг</span><span>Аналитика</span></div>
     </div>
   </div>
   </div>
