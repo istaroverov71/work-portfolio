@@ -179,8 +179,9 @@
   .clients-head { padding: 40px 32px; display: flex; flex-direction: column; gap: 8px; }
   .clients-title { display: flex; flex-direction: column; font-size: calc(96 * var(--u)); line-height: 0.86; letter-spacing: -2px; white-space: nowrap; }
   .clients-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .logo { --logo-pad: 22px; position: relative; aspect-ratio: 1.145 / 1; background: var(--paper); border-left: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-  .logo img { position: absolute; inset: var(--logo-pad); width: calc(100% - 2 * var(--logo-pad)); height: calc(100% - 2 * var(--logo-pad)); object-fit: contain; }
+  .logo { --logo-pad: 0px; position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: var(--paper); border-left: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .logo img { position: absolute; inset: var(--logo-pad); width: calc(100% - 2 * var(--logo-pad)); height: calc(100% - 2 * var(--logo-pad)); object-fit: cover; }
+  .logo-inset { --logo-pad: 9%; background: #fff; }
   .clients-pager { display: grid; grid-template-columns: minmax(0, 1fr) calc(72px + var(--edge)); }
   .clients-viewport { overflow: hidden; }
   .clients-track { display: flex; transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
@@ -314,7 +315,6 @@
     .clients-head { padding: 0; border-right: 0; }
     .clients-title { flex-direction: row; align-items: baseline; gap: 10px; font-size: calc(44 * var(--m)); line-height: 0.85; letter-spacing: 0; }
     .clients-grid { border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); }
-    .logo { aspect-ratio: 1 / 1; --logo-pad: 8px; }
       .clients-pager { display: block; }
     .clients-viewport { overflow: visible; }
     .clients-track { display: block; transform: none !important; }
@@ -598,8 +598,8 @@
     <div class="clients-viewport">
       <div class="clients-track">
   <div class="clients-grid">
-    <div class="logo"><img src="https://i.ibb.co/d4YJXvVd/png-klev-club-ddp9-p-2.png" alt="Сбер" loading="lazy"></div>
-    <div class="logo"><img src="img/clients/yandex.webp" alt="Яндекс" width="400" height="400"></div>
+    <div class="logo logo-inset"><img src="https://i.ibb.co/d4YJXvVd/png-klev-club-ddp9-p-2.png" alt="Сбер" loading="lazy"></div>
+    <div class="logo logo-inset"><img src="img/clients/yandex.webp" alt="Яндекс" width="400" height="400"></div>
     <div class="logo"><img src="https://i.ibb.co/dw3zLV2p/2238e3ca-e3e7-41d0-b.webp" alt="Т-Банк" loading="lazy"></div>
     <div class="logo"><img src="https://i.ibb.co/LXHmq9pC/kaspersky-rebranding-2.png" alt="Kaspersky" loading="lazy"></div>
     <div class="logo"><img src="img/clients/alfa-bank.webp" alt="Альфа-Банк" width="400" height="400"></div>
@@ -610,7 +610,7 @@
   <div class="clients-grid">
     <div class="logo"><img src="img/clients/banki-ru.webp" alt="Банки.ру" width="400" height="400"></div>
     <div class="logo"><img src="img/clients/otp-bank.webp" alt="ОТП Банк" width="400" height="400"></div>
-    <div class="logo"><img src="img/clients/rshb.webp" alt="Россельхозбанк" width="400" height="400"></div>
+    <div class="logo logo-inset"><img src="img/clients/rshb.webp" alt="Россельхозбанк" width="400" height="400"></div>
     <div class="logo"><img src="https://i.ibb.co/PvgzgzqJ/unnamed-2.png" alt="Kitfort"></div>
     <div class="logo"><img src="https://i.ibb.co/gbnDg66j/Instagram-story-10.jpg" alt="MyBox"></div>
     <div class="logo"><img src="img/clients/burger-king.webp" alt="Burger King" width="400" height="400"></div>
