@@ -592,8 +592,7 @@
     </a>
   </div>
   <footer class="footer">
-    <span>© <span id="year">2026</span> Иван Староверов — Портфолио</span>
-    <span>Москва</span>
+    <span>Иван Староверов — Портфолио</span>
   </footer>
 </section>
 
@@ -601,8 +600,6 @@
 
 <script>
 (function() {
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   var roles = Array.prototype.slice.call(document.querySelectorAll('.role'));
   var allBtn = document.querySelector('.exp-all');
