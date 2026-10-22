@@ -55,6 +55,8 @@
   .nav-links a { color: var(--ink); transition: color 0.2s; }
   .nav-links a:hover { color: var(--rust); }
   .nav-links a.accent { color: var(--rust); }
+  .nav-home { justify-self: start; color: var(--ink); transition: color 0.2s; }
+  .nav-home:hover { color: var(--rust); }
 
   /* ---------- HERO ---------- */
   .hero { position: relative; padding: 34px calc(32px + var(--edge)) 0; }
@@ -83,11 +85,10 @@
 
   /* ---------- EXPERIENCE ---------- */
   .exp { border-top: 1px solid var(--ink); display: flex; flex-direction: column; }
-  .exp-head { display: flex; flex-direction: column; gap: 24px; padding: 40px calc(32px + var(--edge)) 28px; border-bottom: 3px solid var(--ink); }
+  .exp-head { display: flex; flex-direction: column; gap: 14px; padding: 40px calc(32px + var(--edge)) 28px; border-bottom: 3px solid var(--ink); }
   .exp-title-wrap { display: flex; flex-direction: column; gap: 8px; }
   .exp-title { display: flex; align-items: baseline; gap: calc(28 * var(--u)); white-space: nowrap; font-size: calc(200 * var(--u)); line-height: 0.8; letter-spacing: calc(-5 * var(--u)); }
-  .exp-summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-left: calc(480 * var(--u)); }
-  .exp-summary p { font-family: var(--serif); font-size: 17px; line-height: 1.5; }
+  .exp-summary { display: flex; justify-content: flex-end; }
   .exp-all { align-self: flex-start; flex-shrink: 0; border: 1px solid var(--ink); padding: 10px 16px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s, color 0.2s; }
   .exp-all:hover { background: var(--ink); color: var(--sheet); }
 
@@ -313,11 +314,10 @@
 </style>
 </head>
 <body>
-<div class="sheet">
+<div class="sheet" id="top">
 
 <nav class="nav" aria-label="Основная навигация">
-  <span class="d-only">Иван Староверов · Digital Marketing · BDM</span>
-  <span class="m-only">Иван Староверов · BDM</span>
+  <a href="#top" class="nav-home">Главная</a>
   <div class="nav-links">
     <a href="#experience">Опыт</a>
     <a href="#cases">Кейсы</a>
@@ -374,7 +374,6 @@
       <h2 class="exp-title display"><span class="rust">Опыт</span><span>работы</span></h2>
     </div>
     <div class="exp-summary">
-      <p>3 компании, 4 должности. Нажмите на должность, чтобы раскрыть достижения.</p>
       <button class="exp-all" type="button" aria-expanded="false">+ Раскрыть всё</button>
     </div>
   </div>
