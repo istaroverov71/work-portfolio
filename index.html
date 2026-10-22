@@ -8,7 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js-reveal');</script>
+<script>
+  document.documentElement.classList.add('js-reveal');
+  setTimeout(function() { document.documentElement.classList.add('loaded'); }, 2500);
+</script>
 <style>
   :root {
     --ink: #231F20;
@@ -40,7 +43,7 @@
   img { display: block; }
   :focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
 
-  .sheet { position: relative; container-type: inline-size; background: var(--sheet); display: flex; flex-direction: column; overflow: hidden; }
+  .sheet { position: relative; container-type: inline-size; background: var(--sheet); display: flex; flex-direction: column; overflow-x: clip; }
   .sheet::after, .nav::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 20; opacity: 0.22; background-image: var(--noise); }
   section[id] { scroll-margin-top: 52px; }
 
@@ -185,6 +188,13 @@
   .js-reveal .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
   .js-reveal .reveal.visible { opacity: 1; transform: none; }
 
+  /* ---------- FIRST-SCREEN INTRO ---------- */
+  .js-reveal .intro { opacity: 0; transform: translateY(18px); }
+  .js-reveal .hero-name.intro { transform: translateY(28%); clip-path: inset(-20% -5% 100% -5%); }
+  .js-reveal .hero-photo.intro { transform: translateY(40px) scale(0.97); transform-origin: 50% 100%; }
+  .js-reveal.loaded .intro { opacity: 1; transform: none; transition: opacity 0.8s ease var(--d, 0s), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s), clip-path 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s); }
+  .js-reveal.loaded .hero-name.intro { clip-path: inset(-20% -5% -20% -5%); }
+
   @media (max-width: 1100px) {
     .role-btn { grid-template-columns: 1fr auto; row-gap: 6px; }
     .role-title { grid-column: 1 / -1; }
@@ -306,7 +316,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
+    .js-reveal .reveal, .js-reveal .intro { opacity: 1; transform: none; clip-path: none; transition: none; }
     .role-detail { transition: none; }
   }
 </style>
@@ -314,7 +324,7 @@
 <body>
 <div class="sheet" id="top">
 
-<nav class="nav" aria-label="Основная навигация">
+<nav class="nav intro" style="--d:0s" aria-label="Основная навигация">
   <a href="#top" class="nav-home">Главная</a>
   <div class="nav-links">
     <a href="#experience">Опыт</a>
@@ -329,36 +339,36 @@
 <header class="hero">
   <div class="hero-top">
   <div class="hero-meta">
-    <span class="hero-first">Иван</span>
+    <span class="hero-first intro" style="--d:0.05s">Иван</span>
   </div>
-  <h1 class="hero-name display">Староверов</h1>
+  <h1 class="hero-name display intro" style="--d:0.12s">Староверов</h1>
   <div class="hero-grid">
-    <div class="hero-role">
+    <div class="hero-role intro" style="--d:0.4s">
       <p class="hero-role-title display">Менеджер по работе <span>с партнерами</span></p>
     </div>
-    <div class="hero-about">
+    <div class="hero-about intro" style="--d:0.5s">
       <p>Специалист по партнёрскому маркетингу и маркетинговой аналитике с 5+ годами опыта в крупнейших IT-компаниях.</p>
       <p class="italic">Запускаю performance- и медийные кампании, строю партнёрства, нахожу точки роста через данные.</p>
     </div>
-    <div class="hero-photo">
+    <div class="hero-photo intro" style="--d:0.28s">
       <div class="hero-photo-frame"><img src="img/ivan-staroverov.webp" alt="Иван Староверов" width="1024" height="1536" fetchpriority="high"></div>
     </div>
   </div>
   </div>
   <div class="stats">
-    <div class="stat">
+    <div style="--d:0.6s" class="stat intro">
       <span class="stat-num"><span class="rust">&gt;</span>90</span>
       <span class="stat-label">Рекламных кампаний запущено и оптимизировано</span>
     </div>
-    <div class="stat">
+    <div style="--d:0.68s" class="stat intro">
       <span class="stat-num">35<span class="rust small">М ₽</span></span>
       <span class="stat-label">Рекламные бюджеты до полугода</span>
     </div>
-    <div class="stat hl">
+    <div style="--d:0.76s" class="stat hl intro">
       <span class="stat-num">50+</span>
       <span class="stat-label">Партнеров: FMCG, Банки, E-com, Travel, IT</span>
     </div>
-    <div class="stat">
+    <div style="--d:0.84s" class="stat intro">
       <span class="stat-num">5<span class="rust">+</span></span>
       <span class="stat-label">Лет опыта в крупнейших IT-компаниях</span>
     </div>
@@ -637,6 +647,16 @@
   document.querySelectorAll('.case-prev').forEach(function(b) { b.addEventListener('click', function() { goTo(current - 1); }); });
   document.querySelectorAll('.case-next').forEach(function(b) { b.addEventListener('click', function() { goTo(current + 1); }); });
   indexBtns.forEach(function(b) { b.addEventListener('click', function() { goTo(+b.getAttribute('data-i')); }); });
+
+  function startIntro() { requestAnimationFrame(function() { document.documentElement.classList.add('loaded'); }); }
+  var heroImg = document.querySelector('.hero-photo img');
+  Promise.race([
+    Promise.all([
+      document.fonts ? document.fonts.ready : null,
+      heroImg && heroImg.decode ? heroImg.decode().catch(function() {}) : null
+    ]),
+    new Promise(function(r) { setTimeout(r, 900); })
+  ]).then(startIntro);
 
   var targets = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window)) {
