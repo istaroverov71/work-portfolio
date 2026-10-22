@@ -169,7 +169,7 @@
   .logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
   /* ---------- CONTACT ---------- */
-  .contact { background: var(--rust); color: var(--cream); padding: 88px calc(32px + var(--edge)) 32px; display: flex; flex-direction: column; gap: 48px; }
+  .contact { background: var(--rust); color: var(--cream); padding: 88px calc(32px + var(--edge)) 72px; display: flex; flex-direction: column; gap: 48px; }
   .contact-title, .contact-title h2 { display: flex; flex-direction: column; gap: 8px; }
   .contact-big { font-size: calc(170 * var(--u)); line-height: 0.82; letter-spacing: calc(-4 * var(--u)); white-space: nowrap; }
   .contact-big.dark { color: var(--ink); }
@@ -182,7 +182,6 @@
   .contact-card-top .arrow { color: var(--rust); font-size: 22px; line-height: 1; }
   .contact-card.dark .arrow { color: var(--teal); }
   .contact-value { font-family: var(--display); font-weight: 700; font-size: calc(48 * var(--u)); line-height: 1; white-space: nowrap; }
-  .footer { display: flex; justify-content: space-between; gap: 16px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
 
   /* ---------- REVEAL ---------- */
   .js-reveal .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
@@ -294,7 +293,7 @@
     .clients-grid { border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); }
     .logo { aspect-ratio: 1 / 1; padding: 8px; }
 
-    .contact { padding: 44px 16px 28px; gap: 22px; }
+    .contact { padding: 44px 16px 40px; gap: 22px; }
     .contact-title, .contact-title h2 { gap: 0; }
     .contact-big { font-size: calc(56 * var(--m)); line-height: 0.85; letter-spacing: 0; white-space: normal; }
     .contact-grid { grid-template-columns: 1fr; gap: 8px; }
@@ -302,7 +301,6 @@
     .contact-card-top { font-size: 9px; letter-spacing: 0.12em; }
     .contact-card-top .arrow { font-size: 16px; }
     .contact-value { font-size: 28px; white-space: normal; overflow-wrap: anywhere; }
-    .footer { font-size: 9px; padding-top: 10px; }
   }
 
   @media (min-width: 560px) and (max-width: 860px) {
@@ -361,7 +359,7 @@
       <span class="stat-label">Рекламных кампаний запущено и оптимизировано</span>
     </div>
     <div style="--d:0.68s" class="stat intro">
-      <span class="stat-num">35<span class="rust small">М ₽</span></span>
+      <span class="stat-num">100<span class="rust small">М ₽</span></span>
       <span class="stat-label">Рекламные бюджеты до полугода</span>
     </div>
     <div style="--d:0.76s" class="stat hl intro">
@@ -600,9 +598,6 @@
       <span class="contact-value">Ivan Staroverov</span>
     </a>
   </div>
-  <footer class="footer">
-    <span>Иван Староверов — Портфолио</span>
-  </footer>
 </section>
 
 </div>
