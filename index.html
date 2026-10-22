@@ -60,14 +60,12 @@
   .hero-meta { display: flex; align-items: baseline; justify-content: space-between; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
   .hero-first { font-family: var(--serif); font-style: italic; font-size: 44px; letter-spacing: 0; text-transform: none; }
   .hero-name { position: relative; z-index: 3; margin: calc(-9 * var(--u)) 0 0 -10px; font-size: calc(246 * var(--u)); line-height: 0.82; letter-spacing: calc(-5 * var(--u)); color: var(--rust); mix-blend-mode: multiply; white-space: nowrap; }
-  .hero-meta > span:last-child { transform: translateY(calc(-35 * var(--u))); }
   .hero-top { position: relative; }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "role" "about"; margin-top: 65px; }
   .hero-role { grid-area: role; display: flex; flex-direction: column; gap: 10px; max-width: 780px; }
   .hero-role-title { font-size: calc(76 * var(--u)); line-height: 0.92; letter-spacing: -1px; text-wrap: balance; }
   .hero-role-title span { display: block; white-space: nowrap; color: var(--rust); }
   .hero-about { grid-area: about; margin-top: 41px; max-width: calc(540 * var(--u)); display: flex; flex-direction: column; gap: 10px; font-family: var(--serif); font-size: 18px; line-height: 1.5; text-wrap: pretty; }
-  .hero-about .label { font-family: var(--mono); }
   .hero-about .italic { font-style: italic; color: var(--gray); }
   .hero-photo { position: absolute; z-index: 4; top: calc(65 * var(--u)); right: -32px; bottom: -37px; width: calc(532 * var(--u)); }
   .hero-photo-frame { position: absolute; inset: 0; overflow: hidden; }
@@ -94,7 +92,6 @@
 
   .company { display: grid; grid-template-columns: calc(510 * var(--u)) 1fr; border-bottom: 1px solid var(--ink); }
   .company-side { padding: 28px 32px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--ink); }
-  .company-num { font-size: 11px; letter-spacing: 0.1em; }
   .company-name { font-size: calc(96 * var(--u)); line-height: 0.9; letter-spacing: -2px; white-space: nowrap; }
   .company-roles { padding: 16px 40px; display: flex; flex-direction: column; }
   .role { display: flex; flex-direction: column; border-bottom: 1px dashed rgba(35,31,32,0.35); }
@@ -119,10 +116,9 @@
   .cases-counter { white-space: nowrap; }
   .cases-body { display: grid; grid-template-columns: calc(250 * var(--u)) minmax(0, 1fr); gap: calc(48 * var(--u)); align-items: start; }
   .cases-index { display: flex; flex-direction: column; border-top: 1px solid var(--line-light); }
-  .cases-index button { display: grid; grid-template-columns: 36px 1fr; gap: 6px; text-align: left; padding: 14px 0; border-bottom: 1px solid var(--line-light); color: rgba(243,235,221,0.6); transition: color 0.2s; }
+  .cases-index button { display: block; text-align: left; padding: 14px 0; border-bottom: 1px solid var(--line-light); color: rgba(243,235,221,0.6); transition: color 0.2s; }
   .cases-index button:hover { color: var(--cream); }
   .cases-index button.active { color: var(--rust-light); }
-  .cases-index .n { font-size: 11px; padding-top: 3px; }
   .cases-index .t { font-family: var(--serif); font-size: 16px; line-height: 1.3; }
   .case { display: grid; grid-template-columns: calc(480 * var(--u)) minmax(0, 1fr); gap: calc(48 * var(--u)); align-items: start; }
   .case[hidden] { display: none; }
@@ -214,14 +210,13 @@
     .hero-name { margin: 10px 0 0; font-size: calc(72 * var(--m)); letter-spacing: -2px; }
     .hero-grid { grid-template-columns: minmax(0, 1fr) 132px; grid-template-areas: "role photo" "about photo"; column-gap: 14px; margin-top: 12px; }
     .hero-role { gap: 6px; }
-    .hero-role .label { font-size: 9px; }
     .hero-role-title { font-size: calc(34 * var(--m)); line-height: 0.95; letter-spacing: 0; text-wrap: wrap; }
     .hero-photo { position: static; grid-area: photo; width: auto; display: flex; flex-direction: column; border-bottom: 22px solid var(--teal); }
     .hero-photo-frame { position: relative; flex: 1; min-height: 0; overflow: visible; }
     .hero-photo-frame img { position: absolute; inset: 0; height: 100%; object-fit: contain; object-position: 50% 100%; }
     .hero-skills { display: none; }
     .hero-about { margin-top: 14px; font-size: 15px; max-width: none; }
-    .hero-about .label, .hero-about .italic { display: none; }
+    .hero-about .italic { display: none; }
 
     .stats { grid-template-columns: 1fr 1fr; margin: 22px -16px 0; border-bottom: 1px solid var(--ink); }
     .stat { min-height: 0; padding: 14px 16px; gap: 6px; justify-content: flex-start; }
@@ -238,7 +233,6 @@
     .exp-summary { display: none; }
     .company { grid-template-columns: 1fr; padding: 16px 16px 4px; }
     .company-side { padding: 0; border-right: 0; flex-direction: row; align-items: baseline; gap: 10px; }
-    .company-num { font-size: 10px; letter-spacing: 0; }
     .company-name { font-size: calc(44 * var(--m)); letter-spacing: 0; }
     .company-roles { padding: 0; }
     .role { border-bottom: 0; border-top: 1px dashed rgba(35,31,32,0.35); margin-top: 10px; }
@@ -286,14 +280,12 @@
 
     .clients { grid-template-columns: 1fr; padding: 28px 16px 32px; gap: 16px; border-bottom: 0; }
     .clients-head { padding: 0; border-right: 0; }
-    .clients-head .label { display: none; }
     .clients-title { flex-direction: row; align-items: baseline; gap: 10px; font-size: calc(44 * var(--m)); line-height: 0.85; letter-spacing: 0; }
     .clients-grid { border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); }
     .logo { aspect-ratio: 1 / 1; padding: 8px; }
 
     .contact { padding: 32px 16px 28px; gap: 18px; }
     .contact-title, .contact-title h2 { gap: 0; }
-    .contact-title .label { display: none; }
     .contact-big { font-size: calc(56 * var(--m)); line-height: 0.85; letter-spacing: 0; white-space: normal; }
     .contact-grid { grid-template-columns: 1fr; gap: 8px; }
     .contact-card { gap: 6px; padding: 14px 16px; }
@@ -323,7 +315,7 @@
 
 <nav class="nav" aria-label="Основная навигация">
   <span class="d-only">Иван Староверов · Digital Marketing · BDM</span>
-  <span class="m-only">Портфолио № 01</span>
+  <span class="m-only">Иван Староверов · BDM</span>
   <div class="nav-links">
     <a href="#experience">Опыт</a>
     <a href="#cases">Кейсы</a>
@@ -338,18 +330,13 @@
   <div class="hero-top">
   <div class="hero-meta">
     <span class="hero-first">Иван</span>
-    <span class="d-only">Портфолио № 01</span>
-    <span class="d-only">VK · Kaspersky · Яндекс</span>
-    <span class="d-only">2021 — сейчас</span>
   </div>
   <h1 class="hero-name display">Староверов</h1>
   <div class="hero-grid">
     <div class="hero-role">
-      <span class="label">— Должность</span>
       <p class="hero-role-title display">Менеджер по работе <span>с партнерами</span></p>
     </div>
     <div class="hero-about">
-      <span class="label">— О себе</span>
       <p>Специалист по партнёрскому маркетингу и маркетинговой аналитике с 5+ годами опыта в крупнейших IT-компаниях.</p>
       <p class="italic">Запускаю performance- и медийные кампании, строю партнёрства, нахожу точки роста через данные.</p>
     </div>
@@ -382,7 +369,6 @@
 <section class="exp" id="experience">
   <div class="exp-head reveal">
     <div class="exp-title-wrap">
-      <span class="label">+ <span class="d-only">Раздел </span>02 · Карьера</span>
       <h2 class="exp-title display"><span class="rust">Опыт</span><span>работы</span></h2>
     </div>
     <div class="exp-summary">
@@ -393,14 +379,13 @@
 
   <div class="company reveal">
     <div class="company-side">
-      <span class="company-num">01</span>
       <span class="company-name display">VK</span>
     </div>
     <div class="company-roles">
       <div class="role">
         <button class="role-btn" type="button" aria-expanded="false">
           <span class="role-title">Менеджер по развитию бизнеса</span>
-          <span class="role-meta"><span class="role-period">май 2025 — сейчас</span> <span class="role-toggle" data-n="4 достижения">+ 4 достижения</span></span>
+          <span class="role-meta"><span class="role-period">май 2025 — сейчас</span> <span class="role-toggle">Раскрыть</span></span>
         </button>
         <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
           <div class="ach"><span class="ach-n">01</span><span>Привлёк 20+ новых партнёров и вел переговоры на уровне CEO и CMO — сформировал стабильный портфель клиентов и принёс 50+ млн руб. выручки.</span></div>
@@ -414,14 +399,13 @@
 
   <div class="company reveal">
     <div class="company-side">
-      <span class="company-num">02</span>
       <span class="company-name display">Kaspersky</span>
     </div>
     <div class="company-roles">
       <div class="role">
         <button class="role-btn" type="button" aria-expanded="false">
           <span class="role-title">Специалист по поддержке продаж</span>
-          <span class="role-meta"><span class="role-period">апр. 2023 — май 2025</span> <span class="role-toggle" data-n="4 достижения">+ 4 достижения</span></span>
+          <span class="role-meta"><span class="role-period">апр. 2023 — май 2025</span> <span class="role-toggle">Раскрыть</span></span>
         </button>
         <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
           <div class="ach"><span class="ach-n">01</span><span>Запустил более 50 партнёрских маркетинговых кампаний (B2B и B2C), которые увеличили среднюю конверсию на 20%.</span></div>
@@ -433,7 +417,7 @@
       <div class="role">
         <button class="role-btn" type="button" aria-expanded="false">
           <span class="role-title">Маркетолог</span>
-          <span class="role-meta"><span class="role-period">март 2022 — март 2023</span> <span class="role-toggle" data-n="3 достижения">+ 3 достижения</span></span>
+          <span class="role-meta"><span class="role-period">март 2022 — март 2023</span> <span class="role-toggle">Раскрыть</span></span>
         </button>
         <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
           <div class="ach"><span class="ach-n">01</span><span>Создал маркетинговые материалы (email-рассылки, баннеры, лендинги), которые повысили CTR на 3% и open rate на 5%.</span></div>
@@ -446,14 +430,13 @@
 
   <div class="company reveal">
     <div class="company-side">
-      <span class="company-num">03</span>
       <span class="company-name display">Яндекс</span>
     </div>
     <div class="company-roles">
       <div class="role">
         <button class="role-btn" type="button" aria-expanded="false">
           <span class="role-title">Рекрутер</span>
-          <span class="role-meta"><span class="role-period">авг. 2021 — март 2022</span> <span class="role-toggle" data-n="1 достижение">+ 1 достижение</span></span>
+          <span class="role-meta"><span class="role-period">авг. 2021 — март 2022</span> <span class="role-toggle">Раскрыть</span></span>
         </button>
         <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
           <div class="ach"><span class="ach-n">01</span><span>Закрыл 10 IT-позиций через активный поиск, скрининг и переговоры с кандидатами.</span></div>
@@ -465,7 +448,6 @@
 
 <section class="cases" id="cases">
   <div class="cases-head reveal">
-    <span class="d-only">+ Раздел 03 · Портфолио</span>
     <span class="rule d-only"></span>
     <h2 class="cases-word">Кейсы</h2>
     <span class="rule"></span>
@@ -474,11 +456,11 @@
 
   <div class="cases-body reveal">
     <div class="cases-index" id="casesIndex">
-      <button type="button" class="active" data-i="0"><span class="n">01</span><span class="t">Марафон T-Банк в Одноклассниках</span></button>
-      <button type="button" data-i="1"><span class="n">02</span><span class="t">Интерактивный спецпроект Tiswell</span></button>
-      <button type="button" data-i="2"><span class="n">03</span><span class="t">Молодёжная карта Сбера</span></button>
-      <button type="button" data-i="3"><span class="n">04</span><span class="t">Кейс 4 — жду детали от тебя</span></button>
-      <button type="button" data-i="4"><span class="n">05</span><span class="t">Кейс 5 — жду детали от тебя</span></button>
+      <button type="button" class="active" data-i="0"><span class="t">Марафон T-Банк в Одноклассниках</span></button>
+      <button type="button" data-i="1"><span class="t">Интерактивный спецпроект Tiswell</span></button>
+      <button type="button" data-i="2"><span class="t">Молодёжная карта Сбера</span></button>
+      <button type="button" data-i="3"><span class="t">Кейс 4 — жду детали от тебя</span></button>
+      <button type="button" data-i="4"><span class="t">Кейс 5 — жду детали от тебя</span></button>
     </div>
 
     <div id="caseSlides">
@@ -553,7 +535,6 @@
 
 <section class="principles" id="principles">
   <div class="exp-title-wrap reveal">
-    <span class="label d-only">+ Раздел 04 · Подход</span>
     <h2 class="pr-title display"><span class="rust">Принципы</span><span class="indent">в работе</span></h2>
   </div>
   <div class="pr-grid reveal">
@@ -577,7 +558,6 @@
 
 <section class="clients" id="clients">
   <div class="clients-head reveal">
-    <span class="label">+ Раздел 05 · Партнёры</span>
     <h2 class="clients-title display"><span class="rust">С кем я</span><span>работал?</span></h2>
   </div>
   <div class="clients-grid reveal">
@@ -594,24 +574,23 @@
 
 <section class="contact" id="contact">
   <div class="contact-title reveal">
-    <span class="label">+ Раздел 06 · Контакты</span>
     <h2 class="display"><span class="contact-big">Давайте работать</span><span class="contact-big dark">вместе</span></h2>
   </div>
   <div class="contact-grid reveal">
     <a class="contact-card" href="mailto:istaroverov71@gmail.com">
-      <span class="contact-card-top"><span>01 · Email</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-card-top"><span>Email</span><span class="arrow" aria-hidden="true">↗</span></span>
       <span class="contact-value">istaroverov71@gmail.com</span>
     </a>
     <a class="contact-card" href="tel:+79851160775">
-      <span class="contact-card-top"><span>02 · Телефон</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-card-top"><span>Телефон</span><span class="arrow" aria-hidden="true">↗</span></span>
       <span class="contact-value">+7 985 116-07-75</span>
     </a>
     <a class="contact-card dark" href="https://t.me/istaroverov7" target="_blank" rel="noopener">
-      <span class="contact-card-top"><span>03 · Telegram</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-card-top"><span>Telegram</span><span class="arrow" aria-hidden="true">↗</span></span>
       <span class="contact-value">@istaroverov7</span>
     </a>
     <a class="contact-card" href="https://www.linkedin.com/in/ivan-staroverov-2721a21bb/" target="_blank" rel="noopener">
-      <span class="contact-card-top"><span>04 · LinkedIn</span><span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="contact-card-top"><span>LinkedIn</span><span class="arrow" aria-hidden="true">↗</span></span>
       <span class="contact-value">Ivan Staroverov</span>
     </a>
   </div>
@@ -639,7 +618,7 @@
     roleBtns.forEach(function(btn) {
       btn.setAttribute('aria-expanded', String(open));
       var t = btn.querySelector('.role-toggle');
-      t.textContent = (open ? '− ' : '+ ') + t.getAttribute('data-n');
+      t.textContent = open ? 'Свернуть' : 'Раскрыть';
     });
     allBtn.setAttribute('aria-expanded', String(open));
     allBtn.textContent = open ? '− Свернуть всё' : '+ Раскрыть всё';
