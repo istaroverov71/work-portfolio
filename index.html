@@ -176,7 +176,7 @@
 
   /* ---------- CLIENTS ---------- */
   .clients { display: grid; grid-template-columns: calc(420 * var(--u)) minmax(0, 1fr); padding: 0 0 0 var(--edge); border-bottom: 1px solid var(--ink); }
-  .clients-head { padding: 40px 32px; border-right: 1px solid var(--ink); display: flex; flex-direction: column; gap: 8px; }
+  .clients-head { padding: 40px 32px; display: flex; flex-direction: column; gap: 8px; }
   .clients-title { display: flex; flex-direction: column; font-size: calc(96 * var(--u)); line-height: 0.86; letter-spacing: -2px; white-space: nowrap; }
   .clients-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .logo { aspect-ratio: 1.25 / 1; background: var(--paper); border-left: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 22px; display: flex; align-items: center; justify-content: center; }
@@ -339,6 +339,7 @@
 
   @media (min-width: 861px) {
     .note-head { display: contents; }
+    .clients-grid .logo:nth-child(n+5) { border-bottom: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
