@@ -148,7 +148,7 @@
   .case-nav { display: flex; align-self: flex-start; border: 1px solid rgba(243,235,221,0.6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
   .case-nav button { padding: 12px 18px; transition: background 0.2s, color 0.2s; }
   .case-nav button + button { border-left: 1px solid rgba(243,235,221,0.6); }
-  .case-nav button:hover { background: var(--cream); color: var(--ink); }
+  @media (hover: hover) { .case-nav button:hover { background: var(--cream); color: var(--ink); } }
 
   /* ---------- PRINCIPLES ---------- */
   .principles { padding: 96px calc(32px + var(--edge)) 120px; display: flex; flex-direction: column; gap: 64px; border-bottom: 1px solid var(--ink); }
@@ -503,7 +503,7 @@
     <div class="cases-index" id="casesIndex">
       <button type="button" class="active" data-i="0"><span class="n">01</span><span class="t">Марафон T-Банк в Одноклассниках</span></button>
       <button type="button" data-i="1"><span class="n">02</span><span class="t">Интерактивный спецпроект Tiswell</span></button>
-      <button type="button" data-i="2"><span class="n">03</span><span class="t">Молодёжная карта Сбера</span></button>
+      <button type="button" data-i="2"><span class="n">03</span><span class="t">Кастдев по индустрии «Банки и Финансы»</span></button>
       <button type="button" data-i="3"><span class="n">04</span><span class="t">Возвращение Burger King на площадку</span></button>
       <button type="button" data-i="4"><span class="n">05</span><span class="t">Клиент под NDA: от теста к коммиту на 30&nbsp;млн&nbsp;₽</span></button>
     </div>
@@ -537,14 +537,14 @@
       </article>
       <article class="case" hidden>
         <div class="case-card">
-          <div class="case-img"><img src="https://i.ibb.co/sdtSF9ZY/Post-keshbek-erid.png" alt="Молодёжная карта Сбера" loading="lazy"></div>
+          <div class="case-img"><img src="img/cases/custdev-banks.webp" alt="Иллюстрация: анализ индустрии, цели и точечные предложения для банков" width="1448" height="1086" loading="lazy"></div>
           <div class="case-caption"><span>Кейс № 03</span><span>03 / 05</span></div>
         </div>
         <div class="case-info">
-          <h3 class="case-title">Молодёжная карта Сбера</h3>
-          <div class="case-field"><span class="label">Задача</span><p>Продвижение дебетовой карты на аудиторию 14–24 года.</p></div>
-          <div class="case-field"><span class="label">Вклад</span><p>Анализ результатов размещения после первой недели, перенастройка таргета, изменение слоганов и креативов.</p></div>
-          <div class="case-field case-result"><span class="label">Результат</span><p>х2 рост числа заявок после оптимизации</p></div>
+          <h3 class="case-title">Кастдев по индустрии «Банки и Финансы»</h3>
+          <div class="case-field"><span class="label">Задача</span><p>Найти точки роста в вертикали «Банки и Финансы» и привлечь новых рекламодателей на площадку.</p></div>
+          <div class="case-field"><span class="label">Вклад</span><p>Провёл кастдев-анализ индустрии, выявил барьеры и ключевые цели. Под каждый барьер и под KPI конкретных банков подготовил точечные предложения вместо универсального оффера.</p></div>
+          <div class="case-field case-result"><span class="label">Результат</span><p>Привлёк 5 новых размещений на 10&nbsp;млн&nbsp;₽ в сумме</p></div>
           <div class="case-nav"><button type="button" class="case-prev">‹ Назад</button><button type="button" class="case-next">Вперёд ›</button></div>
         </div>
       </article>
