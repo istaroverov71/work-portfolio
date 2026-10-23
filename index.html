@@ -135,7 +135,9 @@
   @keyframes case-text-in { from { opacity: 0; transform: translateX(calc(var(--dir, 1) * 28px)); } }
   .case-card { background: var(--sheet); padding: 14px; display: flex; flex-direction: column; gap: 12px; }
   .case-img { height: calc(520 * var(--u)); min-height: 320px; background: var(--stripe-a); display: flex; align-items: center; justify-content: center; }
-  .case-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .case-img { position: relative; overflow: hidden; }
+  .case-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .case-img-contain img { object-fit: contain; }
   .case-caption { display: flex; justify-content: space-between; color: var(--ink); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
   .case-info { display: flex; flex-direction: column; gap: 26px; }
   .case-title { font-family: var(--display); font-weight: 800; font-size: max(40px, calc(52 * var(--u))); line-height: 0.92; text-transform: uppercase; text-wrap: balance; overflow-wrap: anywhere; }
@@ -284,7 +286,7 @@
     .cases-index { display: none; }
     .case { grid-template-columns: 1fr; gap: 18px; }
     .case-card { padding: 8px; gap: 0; }
-    .case-img { height: 240px; min-height: 0; }
+    .case-img { height: auto; min-height: 0; aspect-ratio: 452 / 520; }
     .case-caption { display: none; }
     .case-info { gap: 18px; }
     .case-title { font-size: calc(34 * var(--m)); line-height: 0.95; text-wrap: wrap; }
@@ -511,7 +513,7 @@
     <div id="caseSlides">
       <article class="case">
         <div class="case-card">
-          <div class="case-img"><img src="img/cases/nda-scale.webp" alt="Иллюстрация: договорённость с партнёром и рост результатов" width="714" height="714" loading="lazy"></div>
+          <div class="case-img"><img src="img/cases/nda-scale.webp" alt="Иллюстрация: договорённость с партнёром и рост результатов" width="904" height="1040" loading="lazy"></div>
           <div class="case-caption"><span>Кейс № 01</span><span>01 / 05</span></div>
         </div>
         <div class="case-info">
@@ -524,7 +526,7 @@
       </article>
       <article class="case" hidden>
         <div class="case-card">
-          <div class="case-img"><img src="img/cases/burger-king.webp" alt="Интерактивный баннер Burger King «Собери свой огненный бургер и получи купон»" width="1177" height="873" loading="lazy"></div>
+          <div class="case-img"><img src="img/cases/burger-king.webp" alt="Интерактивный баннер Burger King «Собери свой огненный бургер и получи купон»" width="904" height="1040" loading="lazy"></div>
           <div class="case-caption"><span>Кейс № 02</span><span>02 / 05</span></div>
         </div>
         <div class="case-info">
@@ -537,7 +539,7 @@
       </article>
       <article class="case" hidden>
         <div class="case-card">
-          <div class="case-img"><img src="img/cases/custdev-banks.webp" alt="Иллюстрация: анализ индустрии, цели и точечные предложения для банков" width="1448" height="1086" loading="lazy"></div>
+          <div class="case-img"><img src="img/cases/custdev-banks.webp" alt="Иллюстрация: анализ индустрии, цели и точечные предложения для банков" width="904" height="1040" loading="lazy"></div>
           <div class="case-caption"><span>Кейс № 03</span><span>03 / 05</span></div>
         </div>
         <div class="case-info">
@@ -550,7 +552,7 @@
       </article>
       <article class="case" hidden>
         <div class="case-card">
-          <div class="case-img"><img src="https://i.ibb.co/BKrtzJDz/i.webp" alt="Марафон T-Банк в Одноклассниках" loading="lazy"></div>
+          <div class="case-img"><img src="img/cases/tbank-marathon.webp" alt="Марафон T-Банк в Одноклассниках" width="904" height="1040" loading="lazy"></div>
           <div class="case-caption"><span>Кейс № 04</span><span>04 / 05</span></div>
         </div>
         <div class="case-info">
@@ -563,7 +565,7 @@
       </article>
       <article class="case" hidden>
         <div class="case-card">
-          <div class="case-img"><img src="https://i.ibb.co/NnTXK11G/Frame-10-2.png" alt="Интерактивный спецпроект Tiswell" loading="lazy"></div>
+          <div class="case-img case-img-contain"><img src="https://i.ibb.co/NnTXK11G/Frame-10-2.png" alt="Интерактивный спецпроект Tiswell" loading="lazy"></div>
           <div class="case-caption"><span>Кейс № 05</span><span>05 / 05</span></div>
         </div>
         <div class="case-info">
