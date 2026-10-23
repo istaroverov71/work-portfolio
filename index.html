@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Иван Староверов — Digital Marketing</title>
-<meta name="description" content="Иван Староверов — партнёрский маркетинг и маркетинговая аналитика. VK, Kaspersky, Яндекс.">
+<title>Иван Староверов — Портфолио</title>
+<meta name="description" content="Менеджер по работе с партнёрами: развиваю партнёрства, веду переговоры на уровне C-Level и приношу выручку. VK, Kaspersky, Яндекс.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://istaroverov71.github.io/work-portfolio/">
+<meta property="og:title" content="Иван Староверов — Портфолио">
+<meta property="og:description" content="Менеджер по работе с партнёрами: развиваю партнёрства, веду переговоры на уровне C-Level и приношу выручку. VK, Kaspersky, Яндекс.">
+<meta property="og:image" content="https://istaroverov71.github.io/work-portfolio/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Иван Староверов — менеджер по работе с партнёрами">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://istaroverov71.github.io/work-portfolio/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -41,7 +52,11 @@
   a { color: var(--rust); text-decoration: none; }
   button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
   img { display: block; }
+  @supports not (width: 1cqw) {
+    :root { --edge: max(0px, calc((100vw - 1280px) / 2)); }
+  }
   :focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
+  .cases :focus-visible, .contact :focus-visible { outline-color: var(--cream); }
 
   .sheet { position: relative; container-type: inline-size; background: var(--sheet); display: flex; flex-direction: column; overflow-x: clip; }
   .sheet::after, .nav::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 20; opacity: 0.22; background-image: var(--noise); }
@@ -51,6 +66,7 @@
   .display { font-family: var(--display); font-weight: 800; text-transform: uppercase; }
   .rust { color: var(--rust); }
   .m-only { display: none; }
+  .nowrap { white-space: nowrap; }
 
   /* ---------- NAV ---------- */
   .nav { position: sticky; top: 0; z-index: 30; height: 53px; display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 0 calc(32px + var(--edge)); background: var(--sheet); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--ink); }
@@ -100,7 +116,7 @@
   .company-roles { padding: 16px 40px; display: flex; flex-direction: column; }
   .role { display: flex; flex-direction: column; border-bottom: 1px dashed rgba(35,31,32,0.35); }
   .role-btn { display: grid; grid-template-columns: 1fr auto auto; gap: 24px; align-items: baseline; text-align: left; padding: 16px 0; transition: color 0.2s; }
-  .role-btn:hover { color: var(--rust); }
+  @media (hover: hover) { .role-btn:hover { color: var(--rust); } }
   .role-title { font-family: var(--serif); font-size: 26px; }
   .role-meta { display: contents; }
   .role-period { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); white-space: nowrap; }
@@ -200,9 +216,9 @@
   .contact-big.dark { color: var(--ink); }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .contact-card { display: flex; flex-direction: column; gap: 18px; padding: 26px 28px; background: var(--sheet); color: var(--ink); transition: background 0.2s; }
-  .contact-card:hover { background: var(--paper); }
+  @media (hover: hover) { .contact-card:hover { background: var(--paper); } }
   .contact-card.dark { background: var(--ink); color: var(--cream); }
-  .contact-card.dark:hover { background: #3A3431; }
+  @media (hover: hover) { .contact-card.dark:hover { background: #3A3431; } }
   .contact-card-top { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
   .contact-card-top .arrow { color: var(--rust); font-size: 22px; line-height: 1; }
   .contact-card.dark .arrow { color: var(--teal); }
@@ -235,7 +251,8 @@
     .m-only { display: initial; }
     .label { font-size: 9px; }
 
-    .nav { height: auto; padding: 14px 18px 10px; font-size: 9px; }
+    .nav { height: auto; padding: 4px 18px 0; font-size: 10px; }
+    .nav > a { display: inline-block; padding: 16px 0 14px; }
     .nav-links { display: none; }
 
     .hero { padding: 18px 16px 0; }
@@ -332,6 +349,10 @@
     .contact-value { font-size: 28px; white-space: normal; overflow-wrap: anywhere; }
   }
 
+  @media (max-width: 379px) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr) 118px; column-gap: 10px; }
+  }
+
   @media (min-width: 560px) and (max-width: 860px) {
     .hero-grid { grid-template-columns: minmax(0, 1fr) 150px; }
   }
@@ -373,21 +394,21 @@
   <h1 class="hero-name display intro" style="--d:0.12s">Староверов</h1>
   <div class="hero-grid">
     <div class="hero-role intro" style="--d:0.4s">
-      <p class="hero-role-title display">Менеджер по работе <span>с партнерами</span></p>
+      <p class="hero-role-title display">Менеджер по работе <span>с партнёрами</span></p>
     </div>
     <div class="hero-about intro" style="--d:0.5s">
-     <p>Развиваю партнерства и приношу выручку: нахожу точки роста бизнеса, веду переговоры на уровне C-Level и выстраиваю долгосрочные отношения.</p>
-      <p class="italic">Строю performance- и медийные кампании с партнерами для привлечения клиентов.</p>
+     <p>Развиваю партнёрства и приношу выручку: нахожу точки роста бизнеса, веду переговоры на уровне <span class="nowrap">C-Level</span> и выстраиваю долгосрочные отношения.</p>
+      <p class="italic">Строю performance- и медийные кампании с партнёрами для привлечения клиентов.</p>
     </div>
     <div class="hero-photo intro" style="--d:0.28s">
-      <div class="hero-photo-frame"><img src="img/ivan-staroverov.webp" alt="Иван Староверов" width="1024" height="1536" fetchpriority="high"></div>
+      <div class="hero-photo-frame"><img src="img/ivan-staroverov.webp" srcset="img/ivan-staroverov-560.webp 560w, img/ivan-staroverov.webp 1024w" sizes="(max-width: 860px) 180px, 532px" alt="Иван Староверов" width="1024" height="1536" fetchpriority="high"></div>
     </div>
   </div>
   </div>
   <div class="stats">
     <div style="--d:0.6s" class="stat intro">
       <span class="stat-num">50<span class="rust">+</span></span>
-      <span class="stat-label">Партнеров: FMCG, Банки, E-com, Travel, IT</span>
+      <span class="stat-label">Партнёров: FMCG, Банки, E-com, Travel, IT</span>
     </div>
     <div style="--d:0.68s" class="stat intro">
       <span class="stat-num"><span class="rust">&gt;</span>90</span>
@@ -407,7 +428,7 @@
 <section class="exp" id="experience">
   <div class="exp-head reveal">
     <div class="exp-title-wrap">
-      <h2 class="exp-title display"><span class="rust">Опыт</span><span>работы</span></h2>
+      <h2 class="exp-title display"><span class="rust">Опыт</span> <span>работы</span></h2>
     </div>
     <div class="exp-summary">
       <button class="exp-all" type="button" aria-expanded="false">+ Раскрыть всё</button>
@@ -425,7 +446,7 @@
           <span class="role-meta"><span class="role-period">май 2025 — сейчас</span> <span class="role-toggle">Раскрыть</span></span>
         </button>
         <div class="role-detail"><div class="role-detail-inner"><div class="ach-list">
-          <div class="ach"><span class="ach-n">01</span><span>Привлёк 20+ новых партнёров и вел переговоры на уровне CEO и CMO — сформировал стабильный портфель клиентов и принёс 70+ млн руб. выручки.</span></div>
+          <div class="ach"><span class="ach-n">01</span><span>Привлёк 20+ новых партнёров и вёл переговоры на уровне CEO и CMO — сформировал стабильный портфель клиентов и принёс 70+ млн руб. выручки.</span></div>
           <div class="ach"><span class="ach-n">02</span><span>Разработал индивидуальные офферы и медиапланы под KPI партнёров из 5 вертикалей (Банки, FMCG, E-com, Travel, IT) с бюджетами до 100 млн руб. Согласовал бизнес-цели, защитил стратегии размещения, выстроил долгосрочные отношения с ключевыми ЛПР.</span></div>
           <div class="ach"><span class="ach-n">03</span><span>Реализовал 40+ спецпроектов (перформанс и охватные медийные кампании), от их концепции и постановки KPI до запуска и постаналитики; оптимизировал кампании на основе анализа метрик CTR, CPM, CPC, CPA, выявлял точки роста и повышал конверсию.</span></div>
         </div></div></div>
@@ -545,8 +566,8 @@
         </div>
         <div class="case-info">
           <h3 class="case-title">Марафон T-Банк в Одноклассниках</h3>
-          <div class="case-field"><span class="label">Задача</span><p>Анонсирование Фото-марафона на 8 марта с целью "Поздравить женщин и напомнить о кэшбэке Т-Банк при покупке подарков".</p></div>
-          <div class="case-field"><span class="label">Вклад</span><p>Договорился с командой Т-Банка об изменении концепции марафона. Провел анализ CTR по промо-материалам. Заменил креативы и CTA на более конкретные призывы к участию.</p></div>
+          <div class="case-field"><span class="label">Задача</span><p>Анонсирование Фото-марафона на 8 марта с целью «Поздравить женщин и напомнить о кэшбэке Т-Банк при покупке подарков».</p></div>
+          <div class="case-field"><span class="label">Вклад</span><p>Договорился с командой Т-Банка об изменении концепции марафона. Провёл анализ CTR по промо-материалам. Заменил креативы и CTA на более конкретные призывы к участию.</p></div>
           <div class="case-field case-result"><span class="label">Результат</span><p>+28% перевыполнение кол-ва участников марафона</p></div>
           <div class="case-nav"><button type="button" class="case-prev">‹ Назад</button><button type="button" class="case-next">Вперёд ›</button></div>
         </div>
@@ -570,7 +591,7 @@
 
 <section class="principles" id="principles">
   <div class="exp-title-wrap reveal">
-    <h2 class="pr-title display"><span class="rust">Принципы</span><span class="indent">в работе</span></h2>
+    <h2 class="pr-title display"><span class="rust">Принципы</span> <span class="indent">в работе</span></h2>
   </div>
   <div class="pr-grid reveal">
     <div class="note">
@@ -593,7 +614,7 @@
 
 <section class="clients" id="clients">
   <div class="clients-head reveal">
-    <h2 class="clients-title display"><span class="rust">С кем я</span><span>работал?</span></h2>
+    <h2 class="clients-title display"><span class="rust">С кем я</span> <span>работал?</span></h2>
   </div>
   <div class="clients-pager reveal" id="clientsPager">
     <div class="clients-viewport">
@@ -626,7 +647,7 @@
 
 <section class="contact" id="contact">
   <div class="contact-title reveal">
-    <h2 class="display"><span class="contact-big">Давайте работать</span><span class="contact-big dark">вместе</span></h2>
+    <h2 class="display"><span class="contact-big">Давайте работать</span> <span class="contact-big dark">вместе</span></h2>
   </div>
   <div class="contact-grid reveal">
     <a class="contact-card" href="mailto:istaroverov71@gmail.com">
@@ -712,6 +733,12 @@
   pagerBtn.addEventListener('click', function() {
     var second = pager.classList.toggle('page-2');
     pagerBtn.setAttribute('aria-label', second ? 'Вернуться к первым партнёрам' : 'Показать других партнёров');
+  });
+
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.querySelectorAll('#caseSlides img').forEach(function(img) { new Image().src = img.currentSrc || img.src; });
+    }, 300);
   });
 
   var targets = document.querySelectorAll('.reveal');
